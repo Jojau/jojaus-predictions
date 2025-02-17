@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jojau's predictions</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="style/style.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <!-- SECTION HTML -->
+    <div class="container" id="mainContainer">
+        <h1>Jojau's predictions</h1>
+
+        <!-- ANCHOR USER INFO -->
+        <div id="userInfo">
+            <h2>Your profile</h2>
+            <div>
+                <div>
+                    <p><strong>Username</strong><br /><span id="username"></span></p>
+                    <p><strong>Points</strong><br /><span id="userPoints"></span></p>
+                </div>
+
+                <div>
+                    <label for="inputUsername">Change your username</label>
+                    <div id="userForm">
+                        <input type="text" name="username" id="inputUsername">
+                        <button id="buttonUsername">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANCHOR CURRENT PREDICTIONS -->
+        <div id="predictions">
+            <h2>
+                Current prediction(s)
+            </h2>
+            <p>Currently using : <span id="mode"></span></p>
+
+            <div id="predictionsContainer">
+
+            </div>
+        </div>
+
+        <!-- ANCHOR Leaderboard -->
+        <div id="leaderboard">
+            <h2>Leaderboard</h2>
+            <ol id="leaderboardContainer">
+
+            </ol>
+        </div>
+
+        <!-- ANCHOR FOOTER -->
+        <footer>
+            <p>Hand-made with ❤️ by </p>
+            <img src="assets/logo.png" alt="Jojau's logo">
+        </footer>
+    </div>
+
+    <!-- SECTION TEMPLATES -->
+    <!-- ANCHOR USER IN LIST -->
+    <template id="userInList">
+        <li><span class="username">Username</span> (<span class="points">123</span> pts)</li>
+    </template>
+
+    <!-- ANCHOR PREDICTION -->
+    <template id="currentPrediction">
+        <div class="currentPrediction">
+            <h3 class="title">Prediction title</h3>
+            <div class="status"></div>
+            <div class="outcomes">
+            </div>
+        </div>
+    </template>
+
+    <!-- ANCHOR OUTCOME -->
+    <template id="outcome">
+        <div class="outcome">
+            <h4 class="title">Outcome title</h4>
+
+            <div class="buttons">
+                <input type="button" value="10">
+                <input type="button" value="100">
+                <input type="button" value="1000">
+            </div>
+
+            <p><strong>Odds</strong><br /><span class="odds"></span></p>
+            <div>
+                <p><strong>Total in play</strong><br /><span class="totalPoints">0</span></p>
+                <p><strong>Betters</strong></p>
+                <ol class="betters">
+                </ol>
+            </div>
+        </div>
+    </template>
+    <!-- !SECTION -->
+    <!-- !SECTION -->
+
+    <!-- SECTION SCRIPT -->
+    <script>
+        window.addEventListener('load', () => {
+            const socket = new io();
+
+            // SECTION INITIALISATION
+            const sessionID = localStorage.getItem("sessionID");
+            if (sessionID) {
+                this.usernameAlreadySelected = true;
+                socket.auth = { sessionID };
+                socket.connect();
+            }
+            // ANCHOR - VARIABLES
+            var user = {
+                username: "defaultUsername",
+                points: 0
+            }
+            var inputUsername = document.getElementById("inputUsername");
+            var buttonUsername = document.getElementById("buttonUsername");
+            var spanUsername = document.getElementById("username");
+            var spanUserPoints = document.getElementById("userPoints");
+            const modeSpan = document.getElementById("mode");
+            const userInListTemplate = document.getElementById("userInList").content;
+            var leaderboardContainer = document.getElementById("leaderboardContainer");
+            const currentPredictionTemplate = document.getElementById("currentPrediction").content;
+            var predictionsContainer = document.getElementById("predictionsContainer");
+            const outcomeTemplate = document.getElementById("outcome").content;
+
+            // SECTION FUNCTIONS
+            // SECTION  Display predictions
+            function displayCurrentPredictions(currentPredictions, validatedPrediction = null, validatedOutcomeIndex = null) {
+                predictionsContainer.innerHTML = '';
+                currentPredictions.forEach((prediction) => {
+                    // ANCHOR DISPLAY PREDICTION
+                    let currentPredictionElm = currentPredictionTemplate.cloneNode(true);
+                    currentPredictionElm.querySelector('.currentPrediction').classList.add(prediction.status);
+                    currentPredictionElm.querySelector(".title").textContent = prediction.data.title;
+                    if (prediction.status == 'closing-soon') {
+                        currentPredictionElm.querySelector('.status').textContent = "Closing soon!"
+                        currentPredictionElm.querySelector('.status').setAttribute('title', 'Bets closing at next loading zone (or cutscene idk)');
+                    } else {
+                        currentPredictionElm.querySelector('.status').textContent = prediction.status;
+                    }
+
+                    let currentPredictionOutcomeContainer = currentPredictionElm.querySelector(".outcomes");
+                    prediction.data.outcomes.forEach((outcome, outcomeIndex) => {
+                        // ANCHOR DISPLAY OUTCOME
+                        let outcomeElement = outcomeTemplate.cloneNode(true);
+
+                        if (outcome.validated) outcomeElement.querySelector('.outcome').classList.add('validated');
+
+                        outcomeElement.querySelector(".title").textContent = outcome.title;
+                        outcomeElement.querySelector(".totalPoints").textContent = outcome.totalPoints ?? 0;
+                        outcomeElement.querySelector(".odds").textContent = outcome.odds ?? 0;
+
+                        // ANCHOR PLACE BET
+                        outcomeElement.querySelectorAll("input[type='button']").forEach((button) => {
+                            button.addEventListener("click", (e) => {
+                                socket.emit("placeBet", {
+                                    prediction: prediction,
+                                    outcomeId: outcomeIndex,
+                                    betValue: button.value,
+                                });
+                            });
+                        });
+
+                        let sortedBetters = (outcome.betters ||= []).sort(({ points: a }, { points: b }) => b - a);
+                        sortedBetters.forEach((better) => {
+                            let newLine = userInListTemplate.cloneNode(true);
+                            newLine.querySelector(".username").textContent = better.user.username;
+                            newLine.querySelector(".points").textContent = better.points;
+                            outcomeElement.querySelector(".betters").appendChild(newLine);
+                        });
+
+                        currentPredictionOutcomeContainer.appendChild(outcomeElement);
+                    });
+
+                    predictionsContainer.appendChild(currentPredictionElm);
+                })
+                // !SECTION
+            }
+            // !SECTION
+
+            // ANCHOR RESTORE SESSION
+            socket.on("session", ({ sessionID, userID }) => {
+                // attach the session ID to the next reconnection attempts
+                socket.auth = { sessionID };
+                // store it in the localStorage
+                localStorage.setItem("sessionID", sessionID);
+                // save the ID of the user
+                socket.userID = userID;
+            });
+
+            // ANCHOR - GET INITIAL USERNAME ON CONNECTION
+            socket.on('setUsername', function (data) {
+                user.username = data.username;
+                inputUsername.value = '';
+                inputUsername.placeholder = user.username;
+                spanUsername.textContent = user.username;
+            });
+            // ANCHOR - GET INITIAL POINTS ON CONNECTION
+            socket.on('setPoints', function (data) {
+                user.points = data.points;
+                spanUserPoints.textContent = user.points;
+            });
+            // ANCHOR - GET MODE (ODDS)
+            socket.on("updateMode", function (data) {
+                modeSpan.textContent = data.useFixedOdds ? 'Fixed odds' : 'Chat odds';
+                modeSpan.setAttribute('title', data.useFixedOdds ? 'Odds are determined by their probability in-game' : 'Odds are determined by the bets of the players');
+            })
+            // !SECTION
+
+            // SECTION EVENTS
+            // ANCHOR - USERNAME CHANGE
+            buttonUsername.addEventListener('click', function () {
+                socket.emit('changeUsername', { username: inputUsername.value });
+            })
+
+            // ANCHOR UPDATE LEADERBOARD
+            socket.on("updateLeaderboard", function (data) {
+                leaderboardContainer.innerHTML = '';
+                dataUsers = data.users.sort(({ points: a }, { points: b }) => b - a);
+                dataUsers.forEach(dataUser => {
+                    let newLine = userInListTemplate.cloneNode(true);
+                    newLine.querySelector(".username").textContent = dataUser.username;
+                    newLine.querySelector(".points").textContent = dataUser.points;
+                    leaderboardContainer.appendChild(newLine);
+                });
+            })
+
+            // ANCHOR PREDICTION STARTED
+            socket.on("displayCurrentPredictions", function (data) {
+                displayCurrentPredictions(data.currentPredictions);
+            })
+
+            // ANCHOR PREDICTION CANCELLED
+            // TODO J'aimerais éviter cette ligne mais bon en attendant je veux avancer et passer à autre chose
+            // Bwoah j'peux aussi faire de l'affichage jsp
+            socket.on("predictionCancelled", (data) => {
+                socket.emit("predictionCancelled", { cancelledPrediction: data.cancelledPrediction });
+            });
+
+            // ANCHOR PREDICTION VALIDATED
+            socket.on("predictionValidated", (data) => {
+                socket.emit("predictionValidated", { validatedPrediction: data.validatedPrediction, validatedOutcomeIndex: data.validatedOutcomeIndex });
+            });
+            // !SECTION
+
+            
+        });
+    </script>
+    <!-- !SECTION -->
+</body>
+
+</html>

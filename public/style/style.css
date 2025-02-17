@@ -1,0 +1,321 @@
+@font-face {
+  font-family: "Helvetica Now Display";
+  src: local("Helvetica Now Display Regular"), local("HelveticaNowDisplay-Regular"), url("/assets/fonts/HelveticaNowDisplay-Regular.woff2") format("woff2"), url("/assets/fonts/HelveticaNowDisplay-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Helvetica Now Display";
+  src: local("Helvetica Now Display Reg Ita"), local("HelveticaNowDisplay-RegIta"), url("/assets/fonts/HelveticaNowDisplay-RegIta.woff2") format("woff2"), url("/assets/fonts/HelveticaNowDisplay-RegIta.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Helvetica Now Display";
+  src: local("Helvetica Now Display Bold"), local("HelveticaNowDisplay-Bold"), url("/assets/fonts/HelveticaNowDisplay-Bold.woff2") format("woff2"), url("/assets/fonts/HelveticaNowDisplay-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Helvetica Now Display";
+  src: local("Helvetica Now Display Bold Ita"), local("HelveticaNowDisplay-BoldIta"), url("/assets/fonts/HelveticaNowDisplay-BoldIta.woff2") format("woff2"), url("/assets/fonts/HelveticaNowDisplay-BoldIta.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #020202;
+  color: #FEFAE0;
+  font-family: "Helvetica Now Display";
+}
+
+.container {
+  width: 80%;
+  margin: 48px auto;
+}
+
+button,
+input[type=submit],
+input[type=reset],
+input[type=button] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  font-family: "Helvetica Now Display";
+}
+
+button,
+input[type=button] {
+  padding: 8px;
+  background-color: #F0EBCE;
+  color: #020202;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 24px;
+}
+
+p {
+  margin: 0;
+}
+
+strong,
+label {
+  font-weight: 700;
+}
+
+input {
+  min-width: 0;
+}
+
+#mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 48px;
+}
+#mainContainer #userInfo {
+  max-width: 100%;
+  margin: auto;
+}
+#mainContainer #userInfo > div {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  padding: 24px 48px;
+  background: #1D2922;
+}
+#mainContainer #userInfo > div > div:nth-child(1) {
+  display: flex;
+  justify-content: center;
+  -moz-column-gap: 16px;
+       column-gap: 16px;
+}
+#mainContainer #userInfo > div > div:nth-child(1) p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#mainContainer #userInfo > div > div:nth-child(1) p:nth-child(2) {
+  flex-shrink: 0;
+}
+#mainContainer #userInfo > div > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+}
+#mainContainer #userInfo > div > div:nth-child(2) #userForm {
+  display: flex;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+}
+#mainContainer #userInfo > div > div:nth-child(2) #userForm #inputUsername {
+  flex: 1 1 100%;
+}
+#mainContainer #predictions h2 {
+  margin-bottom: 0;
+}
+#mainContainer #predictions > p {
+  text-align: center;
+  margin-bottom: 24px;
+}
+#mainContainer #predictions #predictionsContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+#mainContainer #predictions #predictionsContainer:empty::after {
+  content: "No prediction at the moment :(";
+  text-align: center;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction {
+  position: relative;
+  padding: 24px;
+  background-color: #242424;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction.open, #mainContainer #predictions #predictionsContainer .currentPrediction.closing-soon {
+  background-color: #1D2922;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction.open .status, #mainContainer #predictions #predictionsContainer .currentPrediction.closing-soon .status {
+  background-color: #058C42;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction.open .outcomes .outcome, #mainContainer #predictions #predictionsContainer .currentPrediction.closing-soon .outcomes .outcome {
+  background-color: #395144;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction.open .outcomes .outcome .buttons, #mainContainer #predictions #predictionsContainer .currentPrediction.closing-soon .outcomes .outcome .buttons {
+  display: flex;
+  justify-content: center;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction.closing-soon .status {
+  background-color: #FFB000;
+  color: #020202;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction.closed .status {
+  background-color: #FFB000;
+  color: #020202;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction > .title {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction .status {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #474747;
+  padding: 8px;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction .status::first-letter {
+  text-transform: capitalize;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction .outcomes {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  row-gap: 16px;
+  -moz-column-gap: 16px;
+       column-gap: 16px;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction .outcomes h5 {
+  font-size: 16px;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction .outcomes .outcome {
+  width: 100%;
+  max-width: 250px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  background-color: #474747;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction .outcomes .outcome.validated {
+  background-color: #058C42;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction .outcomes .outcome .buttons {
+  display: none;
+}
+#mainContainer #predictions #predictionsContainer .currentPrediction .outcomes .outcome .betters {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  padding-left: 0;
+  list-style-position: inside;
+  max-height: 120px;
+  overflow: auto;
+}
+#mainContainer #leaderboardContainer {
+  padding: 24px 48px;
+  background-color: #1D2922;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  list-style-position: inside;
+}
+#mainContainer #leaderboardContainer li .username {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: calc(100% - 100px);
+  vertical-align: bottom;
+}
+#mainContainer footer {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+  justify-content: center;
+}
+#mainContainer footer img {
+  height: 50px;
+}
+
+#adminContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 48px;
+  font-size: large;
+}
+#adminContainer #content {
+  display: flex;
+  -moz-column-gap: 48px;
+       column-gap: 48px;
+}
+#adminContainer #predictionsList {
+  flex: 0 0 250px;
+  max-height: 666px;
+  overflow: auto;
+}
+#adminContainer #predictionsList .prediction {
+  margin-bottom: 24px;
+}
+#adminContainer #predictionsList .prediction button.used {
+  background-color: #020202;
+  border: 1px solid #FEFAE0;
+  color: #FEFAE0;
+}
+#adminContainer #predictionsList .prediction:nth-child(2n) {
+  background-color: #1D2922;
+}
+#adminContainer #currentPredictionsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  -moz-column-gap: 48px;
+       column-gap: 48px;
+  row-gap: 48px;
+}
+#adminContainer #currentPredictionsContainer .currentPrediction {
+  background: #1D2922;
+  font-size: x-large;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  padding: 24px;
+}
+#adminContainer #currentPredictionsContainer .currentPrediction .status {
+  text-align: center;
+}
+#adminContainer #currentPredictionsContainer .currentPrediction .closeCurrentPrediction {
+  background: #FFB000;
+}
+#adminContainer #currentPredictionsContainer .currentPrediction button {
+  padding: 24px;
+}
+#adminContainer #currentPredictionsContainer .currentPrediction .outcomeContainer {
+  display: flex;
+  -moz-column-gap: 16px;
+       column-gap: 16px;
+  row-gap: 16px;
+}
+#adminContainer #currentPredictionsContainer .currentPrediction .currentPredictionOutcome .title {
+  text-align: center;
+  font-size: larger;
+}
+#adminContainer #currentPredictionsContainer .currentPrediction .currentPredictionOutcome .validateOutcome {
+  background: #058C42;
+  color: #FEFAE0;
+}
+#adminContainer #currentPredictionsContainer .currentPrediction .cancelCurrentPrediction {
+  background: red;
+  color: #FEFAE0;
+}/*# sourceMappingURL=style.css.map */

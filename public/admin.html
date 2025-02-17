@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Admin panel | Jojau's prédictions</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <!-- SECTION HTML -->
+    <div id="adminContainer" class="container">
+        <h1>Admin panel</h1>
+
+        <!-- ANCHOR SWITCH MODE -->
+        <div id="modeContainer">
+            <p><strong>Current mode</strong><br /><span id="mode"></span></p>
+            <button id="switchMode">Switch</button>
+        </div>
+
+        <div id="content">
+            <!-- ANCHOR PREDICTIONS LIST -->
+            <aside id="predictionsList">
+                <h2>All predictions</h2>
+            
+            </aside>
+            
+            <!-- ANCHOR CURRENT PREDICTION -->
+            <div id="currentPrediction">
+                <h2>Current prediction(s)</h2>
+                <div id="currentPredictionsContainer">
+            
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ANCHOR TEMPLATES -->
+    <template id="predictionElmInListTemplate">
+        <div class="prediction">
+            <p class="title"></p>
+            <button type="button" class="startPrediction">Start!</button>
+        </div>
+    </template>
+
+    <template id="currentPredictionTemplate">
+        <div class="currentPrediction">
+            <h3 class="title"></h3>
+            <div class="status"></div>
+            <button type="button" class="CurrentPredictionClosingSoon">Set status to "Closing Soon"</button>
+            <button type="button" class="closeCurrentPrediction">Close prediction</button>
+            <div class="outcomeContainer">
+            
+            </div>
+            <button type="button" class="cancelCurrentPrediction">⚠️Cancel⚠️</button>
+        </div>
+    </template>
+
+    <template id="currentPredictionOutcomeTemplate">
+        <div class="currentPredictionOutcome">
+            <p class="title"></p>
+            <button type="button" class="validateOutcome">Validate</button>
+        </div>
+    </template>
+    <!-- !SECTION -->
+
+    <!-- SECTION SCRIPTS -->
+    <script src="/data/predictions.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            const socket = io();
+            const adminSocket = io("/admin");
+
+            // ANCHOR IMPORTING AND DISPLAYING ALL PREDICTIONS
+            const predictionsList = document.getElementById("predictionsList");
+            const predictionElmInListTemplate = document.getElementById("predictionElmInListTemplate").content;
+            data.predictions.forEach(prediction => {
+                let predictionElm = predictionElmInListTemplate.cloneNode(true);
+                predictionElm.querySelector(".title").textContent = prediction.data.title;
+                predictionElm.querySelector("button.startPrediction").dataset.predictionId = prediction.name;
+                predictionsList.appendChild(predictionElm);
+            });
+
+            // SECTION EVENTS
+            // ANCHOR CHANGE MODE (ODDS)
+            const switchModeButton = document.getElementById("switchMode");
+            const modeSpan = document.getElementById("mode");
+            switchModeButton.addEventListener('click', () => {
+                adminSocket.emit('switchMode');
+            })
+            socket.on("updateMode", function (data) {
+                modeSpan.textContent = data.useFixedOdds ? 'Fixed odds' : 'Chat odds';
+            })
+
+            // ANCHOR START PREDICTION
+            const startPredictionButtons = document.getElementsByClassName("startPrediction");
+            const currentPredictionTemplate = document.getElementById("currentPredictionTemplate").content;
+            const currentPredictionOutcomeTemplate = document.getElementById("currentPredictionOutcomeTemplate").content;
+            Array.from(startPredictionButtons).forEach((predictionButton) => {
+                predictionButton.addEventListener('click', (e) => {
+                    let prediction = data.predictions.find(prediction => {
+                        return prediction.name === predictionButton.dataset.predictionId;
+                    });
+
+                    prediction.status = 'open';
+
+                    e.target.classList.add('used');
+
+                    adminSocket.emit('startPrediction', { prediction: prediction });
+                });
+            });
+
+            // SECTION MANAGE CURRENT PREDICTIONS
+            function displayCurrentPredictions(predictions) {
+                document.getElementById("currentPredictionsContainer").innerHTML = '';
+                predictions.forEach(prediction => {
+                    // ANCHOR DISPLAY
+                    let currentPredictionElm = currentPredictionTemplate.cloneNode(true);
+                    currentPredictionElm.querySelector(".title").textContent = prediction.data.title;
+                    currentPredictionElm.querySelector(".status").textContent = prediction.status;
+                    currentPredictionElm.querySelectorAll("button").forEach((button) => {
+                        button.dataset.predictionId = prediction.name;
+                    });
+
+                    // ANCHOR CLOSE BETS
+                    let closeButton = currentPredictionElm.querySelector(".closeCurrentPrediction");
+                    closeButton.addEventListener('click', (e) => {
+                        // let prediction = data.predictions.find(prediction => {
+                        //     return prediction.name === closeButton.dataset.predictionId;
+                        // });
+                        adminSocket.emit('closePrediction', { prediction: prediction });
+                    })
+
+                    // ANCHOR SET TO "CLOSING SOON"
+                    let closingSoonButton = currentPredictionElm.querySelector(".CurrentPredictionClosingSoon");
+                    closingSoonButton.addEventListener('click', (e) => {
+                        adminSocket.emit('setPredictionClosingSoon', { prediction: prediction });
+                    })
+
+                    // ANCHOR MANAGE OUTCOMES
+                    let currentPredictionOutcomeContainer = currentPredictionElm.querySelector(".outcomeContainer");
+                    prediction.data.outcomes.forEach((outcome, index) => {
+                        // DISPLAY
+                        let outcomeElement = currentPredictionOutcomeTemplate.cloneNode(true);
+                        outcomeElement.querySelector(".title").textContent = outcome.title;
+
+                        // VALIDATE
+                        let validateOutcomeButton = outcomeElement.querySelector("button.validateOutcome");
+                        validateOutcomeButton.dataset.outcomeId = index;
+                        validateOutcomeButton.addEventListener('click', (e) => {
+                            adminSocket.emit('validateOutcome', { prediction: prediction, outcomeIndex: index });
+                        });
+
+                        currentPredictionOutcomeContainer.appendChild(outcomeElement);
+                    });
+
+                    // ANCHOR CANCEL
+                    let cancelButton = currentPredictionElm.querySelector(".cancelCurrentPrediction");
+                    cancelButton.addEventListener('click', (e) => {
+                        // let prediction = data.predictions.find(prediction => {
+                        //     return prediction.name === cancelButton.dataset.predictionId;
+                        // });
+                        adminSocket.emit('cancelPrediction', { prediction: prediction });
+                    })
+
+                    // PUSH TO HTML DOCUMENT
+                    document.getElementById("currentPredictionsContainer").appendChild(currentPredictionElm);
+                });
+            }
+            socket.on("displayCurrentPredictions", function (data) {
+                displayCurrentPredictions(data.currentPredictions);
+            })
+
+            // !SECTION
+            // !SECTION
+        });
+    </script>
+    <!-- !SECTION -->
+</body>
+
+</html>

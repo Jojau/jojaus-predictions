@@ -1,0 +1,411 @@
+// ANCHOR VARIABLES
+$very-dark : #020202;
+$very-dark-grey: #242424;
+$dark-grey : #474747;
+$mid-grey: #646464;
+
+$dark : #1D2922;
+$semi-dark-green : #395144;
+$medium-green : #4E6C50;
+$light-green : #058C42;
+$fluo-green : #16DB65;
+
+$brown : #AA8B56;
+$gold : #BB9950;
+$yellow : #FFB000;
+$purple : #DA1690;
+
+$grey : #aeae9c;
+$beige : #F0EBCE;
+$white : #F5F5DC;
+$super-white : #FEFAE0;
+
+//  ANCHOR FONTS
+@font-face {
+    font-family: 'Helvetica Now Display';
+    src: local('Helvetica Now Display Regular'), local('HelveticaNowDisplay-Regular'),
+        url('/assets/fonts/HelveticaNowDisplay-Regular.woff2') format('woff2'),
+        url('/assets/fonts/HelveticaNowDisplay-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Helvetica Now Display';
+    src: local('Helvetica Now Display Reg Ita'), local('HelveticaNowDisplay-RegIta'),
+        url('/assets/fonts/HelveticaNowDisplay-RegIta.woff2') format('woff2'),
+        url('/assets/fonts/HelveticaNowDisplay-RegIta.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Helvetica Now Display';
+    src: local('Helvetica Now Display Bold'), local('HelveticaNowDisplay-Bold'),
+        url('/assets/fonts/HelveticaNowDisplay-Bold.woff2') format('woff2'),
+        url('/assets/fonts/HelveticaNowDisplay-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Helvetica Now Display';
+    src: local('Helvetica Now Display Bold Ita'), local('HelveticaNowDisplay-BoldIta'),
+        url('/assets/fonts/HelveticaNowDisplay-BoldIta.woff2') format('woff2'),
+        url('/assets/fonts/HelveticaNowDisplay-BoldIta.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+// ANCHOR GENERAL
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $very-dark;
+    color: $super-white;
+    font-family: "Helvetica Now Display";
+}
+
+.container {
+    width: 80%;
+    margin: 48px auto;
+}
+
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+
+    font-family: "Helvetica Now Display";
+}
+
+button,
+input[type="button"] {
+    padding: 8px;
+    background-color: $beige;
+    color: $very-dark;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 24px;
+}
+
+p {
+    margin: 0;
+}
+
+strong,
+label {
+    font-weight: 700;
+}
+
+input {
+    min-width: 0;
+}
+
+// SECTION PLAYER INTERFACE
+#mainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 48px;
+
+    #userInfo {
+        max-width: 100%;
+        margin: auto;
+
+        &>div {
+            display: flex;
+            flex-direction: column;
+            row-gap: 16px;
+            padding: 24px 48px;
+            background: $dark;
+
+            &>div:nth-child(1) {
+                display: flex;
+                justify-content: center;
+                column-gap: 16px;
+
+                p {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+
+                    &:nth-child(2) {
+                        flex-shrink: 0;
+                    }
+                }
+            }
+
+            &>div:nth-child(2) {
+                display: flex;
+                flex-direction: column;
+
+                #userForm {
+                    display: flex;
+                    column-gap: 8px;
+
+                    #inputUsername {
+                        flex: 1 1 100%;
+                    }
+                }
+            }
+        }
+    }
+
+    #predictions {
+
+        h2 {
+            margin-bottom: 0;
+        }
+
+        >p {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        #predictionsContainer {
+            display: flex;
+            flex-direction: column;
+            row-gap: 24px;
+
+            &:empty::after {
+                content: "No prediction at the moment :(";
+                text-align: center;
+            }
+
+            .currentPrediction {
+                position: relative;
+                padding: 24px;
+                background-color: $very-dark-grey;
+
+                &.open,
+                &.closing-soon {
+                    background-color: $dark;
+
+                    .status {
+                        background-color: $light-green;
+                    }
+
+                    .outcomes .outcome {
+                        background-color: $semi-dark-green;
+
+                        .buttons {
+                            display: flex;
+                            justify-content: center;
+                            column-gap: 8px;
+                        }
+                    }
+                }
+
+                &.closing-soon {
+                    .status {
+                        background-color: $yellow;
+                        color: $very-dark;
+                    }
+                }
+
+                &.closed {
+                    .status {
+                        background-color: $yellow;
+                        color: $very-dark;
+                    }
+                }
+
+                >.title {
+                    font-weight: 700;
+                    text-align: center;
+                    margin-bottom: 16px;
+                }
+
+                .status {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+
+                    background-color: $dark-grey;
+
+                    padding: 8px;
+
+                    &::first-letter {
+                        text-transform: capitalize;
+                    }
+                }
+
+                .outcomes {
+                    display: flex;
+                    justify-content: center;
+                    align-items: stretch;
+                    flex-wrap: wrap;
+                    row-gap: 16px;
+                    column-gap: 16px;
+
+                    h5 {
+                        font-size: 16px;
+                    }
+
+                    .outcome {
+                        width: 100%;
+                        max-width: 250px;
+                        padding: 16px;
+                        display: flex;
+                        flex-direction: column;
+                        row-gap: 16px;
+                        background-color: $dark-grey;
+
+                        &.validated {
+                            background-color: $light-green;
+                        }
+
+                        .buttons {
+                            display: none;
+                        }
+
+                        .betters {
+                            margin: 0;
+                            display: flex;
+                            flex-direction: column;
+                            row-gap: 4px;
+                            padding-left: 0;
+                            list-style-position: inside;
+                            max-height: 120px;
+                            overflow: auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #leaderboardContainer {
+        padding: 24px 48px;
+        background-color: $dark;
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+        list-style-position: inside;
+
+        li .username {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            max-width: calc(100% - 100px); //TODO Voir si on peut pas éviter une valeur explicite ici
+            vertical-align: bottom;
+        }
+    }
+
+    footer {
+        display: flex;
+        align-items: center;
+        column-gap: 8px;
+        justify-content: center;
+
+        img {
+            height: 50px;
+        }
+    }
+}
+
+// !SECTION
+
+// SECTION ADMIN INTERFACE
+#adminContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 48px;
+    font-size: large;
+
+    #content {
+        display: flex;
+        column-gap: 48px;
+    }
+
+    #predictionsList {
+        flex: 0 0 250px;
+        max-height: 666px;
+        overflow: auto;
+
+        .prediction {
+            margin-bottom: 24px;
+
+            button.used {
+                background-color: #020202;
+                border: 1px solid $super-white;
+                color: $super-white;
+            }
+        }
+
+        .prediction:nth-child(2n) {
+            background-color: $dark;
+        }
+    }
+
+    #currentPredictionsContainer {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 48px;
+        row-gap: 48px;
+
+        .currentPrediction {
+            background: $dark;
+            font-size: x-large;
+            display: flex;
+            flex-direction: column;
+            row-gap: 24px;
+            padding: 24px;
+
+            .status {
+                text-align: center;
+            }
+
+            .closeCurrentPrediction {
+                background: $yellow;
+            }
+
+            button {
+                padding: 24px;
+            }
+
+            .outcomeContainer {
+                display: flex;
+                column-gap: 16px;
+                row-gap: 16px;
+            }
+
+            .currentPredictionOutcome {
+                .title {
+                    text-align: center;
+                    font-size: larger;
+                }
+
+                .validateOutcome {
+                    background: $light-green;
+                    color: $super-white;
+                }
+            }
+
+            .cancelCurrentPrediction {
+                background: red;
+                color: $super-white;
+            }
+        }
+    }
+}
+
+// !SECTION
