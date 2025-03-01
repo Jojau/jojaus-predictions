@@ -3,30 +3,59 @@ const data = {
         {
             "auto_predict": {
                 "auto_start": true,
-                "split_name": "Slingshot"
+                "split_name": "Fish1"
             },
             "data": {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "27"
+                        "title": "26cm"
                     },
                     {
-                        "title": "28"
+                        "title": "27cm"
                     },
                     {
-                        "title": "29"
+                        "title": "28cm"
+                    },
+                    {
+                        "title": "29cm"
                     }
                 ],
-                "prediction_window": 270,
-                "title": "Size of the fish eaten by the cat (cm)"
+                "prediction_window": 300,
+                "title": "Size of the 1st fish?"
             },
-            "name": "Fish"
+            "name": "Fish1"
         },
         {
             "auto_predict": {
                 "auto_start": true,
-                "split_name": "Talo"
+                "split_name": "Fish2"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "26cm"
+                    },
+                    {
+                        "title": "27cm"
+                    },
+                    {
+                        "title": "28cm"
+                    },
+                    {
+                        "title": "29cm"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Size of the 2nd fish?"
+            },
+            "name": "Fish2"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "StoneRupee"
             },
             "data": {
                 "broadcaster_id": "",
@@ -38,7 +67,7 @@ const data = {
                         "title": "Nothing"
                     }
                 ],
-                "prediction_window": 40,
+                "prediction_window": 300,
                 "title": "What's under the stone?"
             },
             "name": "StoneRupee"
@@ -46,7 +75,7 @@ const data = {
         {
             "auto_predict": {
                 "auto_start": true,
-                "split_name": "Zelda"
+                "split_name": "Goats"
             },
             "data": {
                 "broadcaster_id": "",
@@ -58,110 +87,15 @@ const data = {
                         "title": "Even"
                     }
                 ],
-                "prediction_window": 40,
-                "title": "Centh of the goats minigame time?"
+                "prediction_window": 300,
+                "title": "Centh of goats time?"
             },
             "name": "Goats"
         },
         {
             "auto_predict": {
                 "auto_start": true,
-                "split_name": "Enter Faron"
-            },
-            "data": {
-                "broadcaster_id": "",
-                "outcomes": [
-                    {
-                        "title": "In front of his house"
-                    },
-                    {
-                        "title": "Down the path"
-                    }
-                ],
-                "prediction_window": 150,
-                "title": "Moi spawns..."
-            },
-            "name": "Moi"
-        },
-        {
-            "auto_predict": {
-                "auto_start": true,
-                "split_name": "Enter EMS"
-            },
-            "data": {
-                "broadcaster_id": "",
-                "outcomes": [
-                    {
-                        "title": "1"
-                    },
-                    {
-                        "title": "2"
-                    },
-                    {
-                        "title": "3"
-                    },
-                    {
-                        "title": "4"
-                    },
-                    {
-                        "title": ">5"
-                    }
-                ],
-                "prediction_window": 240,
-                "title": "Tries to get EMS"
-            },
-            "name": "EMS"
-        },
-        {
-            "auto_predict": {
-                "auto_start": false,
-                "split_name": "Enter Sacred Grove"
-            },
-            "data": {
-                "broadcaster_id": "",
-                "outcomes": [
-                    {
-                        "title": "Yeah"
-                    },
-                    {
-                        "title": "Nah"
-                    }
-                ],
-                "prediction_window": 150,
-                "title": "Will a bird hit me on the rooftops?"
-            },
-            "name": "ZeldaBirds"
-        },
-        {
-            "auto_predict": {
-                "auto_start": false,
-                "split_name": "Master Sword"
-            },
-            "data": {
-                "broadcaster_id": "",
-                "outcomes": [
-                    {
-                        "title": "1"
-                    },
-                    {
-                        "title": "2"
-                    },
-                    {
-                        "title": "3"
-                    },
-                    {
-                        "title": "4"
-                    }
-                ],
-                "prediction_window": 120,
-                "title": "Sidehops to clip through Lanayru Gate?"
-            },
-            "name": "LanayruGateClip"
-        },
-        {
-            "auto_predict": {
-                "auto_start": true,
-                "split_name": "Enter Forest Temple"
+                "split_name": "ZeldaBirds"
             },
             "data": {
                 "broadcaster_id": "",
@@ -173,15 +107,64 @@ const data = {
                         "title": "No"
                     }
                 ],
-                "prediction_window": 270,
-                "title": "Backflip?"
+                "prediction_window": 300,
+                "title": "Will I get hit by a bird on the rooftops?"
             },
-            "name": "Backflip"
+            "name": "ZeldaBirds"
         },
         {
             "auto_predict": {
                 "auto_start": true,
-                "split_name": "Gale"
+                "split_name": "JamalRevives"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "No \ud83d\ude0e"
+                    },
+                    {
+                        "title": "1x"
+                    },
+                    {
+                        "title": "2x"
+                    },
+                    {
+                        "title": "3x"
+                    },
+                    {
+                        "title": ">=4x"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Reviving Jamal?"
+            },
+            "name": "JamalRevives"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "PostFaronTwilightBackflip"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Yes"
+                    },
+                    {
+                        "title": "No"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Backflip?"
+            },
+            "name": "PostFaronTwilightBackflip"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "OokHops"
             },
             "data": {
                 "broadcaster_id": "",
@@ -196,33 +179,33 @@ const data = {
                         "title": "4"
                     },
                     {
-                        "title": ">5"
+                        "title": ">=5"
                     }
                 ],
                 "prediction_window": 300,
                 "title": "Ook hops?"
             },
-            "name": "Ook"
+            "name": "OokHops"
         },
         {
             "auto_predict": {
                 "auto_start": true,
-                "split_name": "Enter Diababa"
+                "split_name": "BokoDrop"
             },
             "data": {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "A blue rupee"
+                        "title": "A heart"
                     },
                     {
-                        "title": "A heart"
+                        "title": "A blue rupee"
                     },
                     {
                         "title": "Nothing"
                     }
                 ],
-                "prediction_window": 60,
+                "prediction_window": 300,
                 "title": "The boko drops..."
             },
             "name": "BokoDrop"
@@ -230,22 +213,48 @@ const data = {
         {
             "auto_predict": {
                 "auto_start": true,
-                "split_name": "Eldin Vessel"
+                "split_name": "EldinVesselPostman"
             },
             "data": {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "Item get (\"tatatadada!\")"
+                        "title": "Item get (tadadada!)"
                     },
                     {
-                        "title": "Rupee get (\"HmHmHmm!\")"
+                        "title": "Rupee Get (HmmHmmHmm!)"
                     }
                 ],
-                "prediction_window": 60,
+                "prediction_window": 300,
                 "title": "The postman sings..."
             },
-            "name": "EldinPostman"
+            "name": "EldinVesselPostman"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "LanayruGateSidehop"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "#1"
+                    },
+                    {
+                        "title": "#2"
+                    },
+                    {
+                        "title": "#3"
+                    },
+                    {
+                        "title": "#4"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Successful sidehop through Lanayru Gate?"
+            },
+            "name": "LanayruGateSidehop"
         }
     ]
 }
