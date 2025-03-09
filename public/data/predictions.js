@@ -61,10 +61,12 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "A green rupee"
+                        "title": "A green rupee",
+                        "fixedOdds": 1.25
                     },
                     {
-                        "title": "Nothing"
+                        "title": "Nothing",
+                        "fixedOdds": 5
                     }
                 ],
                 "prediction_window": 300,
@@ -101,10 +103,12 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "Yes"
+                        "title": "Yes",
+                        "fixedOdds": 10
                     },
                     {
-                        "title": "No"
+                        "title": "No",
+                        "fixedOdds": 1.11
                     }
                 ],
                 "prediction_window": 300,
@@ -121,19 +125,20 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "No \ud83d\ude0e"
+                        "title": "No \ud83d\ude0e",
+                        "fixedOdds": 6.3
                     },
                     {
-                        "title": "1x"
+                        "title": "1x",
+                        "fixedOdds": 2.93
                     },
                     {
-                        "title": "2x"
+                        "title": "2x",
+                        "fixedOdds": 2.93
                     },
                     {
-                        "title": "3x"
-                    },
-                    {
-                        "title": ">=4x"
+                        "title": "3x or more",
+                        "fixedOdds": 6.3
                     }
                 ],
                 "prediction_window": 300,
@@ -150,10 +155,12 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "Yes"
+                        "title": "Yes",
+                        "fixedOdds": 4.35
                     },
                     {
-                        "title": "No"
+                        "title": "No",
+                        "fixedOdds": 1.3
                     }
                 ],
                 "prediction_window": 300,
@@ -170,16 +177,20 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "2"
+                        "title": "2",
+                        "fixedOdds": 3.33
                     },
                     {
-                        "title": "3"
+                        "title": "3",
+                        "fixedOdds": 3.33
                     },
                     {
-                        "title": "4"
+                        "title": "4",
+                        "fixedOdds": 3.33
                     },
                     {
-                        "title": ">=5"
+                        "title": ">=5",
+                        "fixedOdds": 10
                     }
                 ],
                 "prediction_window": 300,
@@ -239,16 +250,20 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "#1"
+                        "title": "#1",
+                        "fixedOdds": 6.3
                     },
                     {
-                        "title": "#2"
+                        "title": "#2",
+                        "fixedOdds": 2.93
                     },
                     {
-                        "title": "#3"
+                        "title": "#3",
+                        "fixedOdds": 2.93
                     },
                     {
-                        "title": "#4"
+                        "title": "#4",
+                        "fixedOdds": 6.3
                     }
                 ],
                 "prediction_window": 300,
