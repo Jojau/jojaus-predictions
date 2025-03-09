@@ -90,7 +90,7 @@ const data = {
                     }
                 ],
                 "prediction_window": 300,
-                "title": "Centh of goats time?"
+                "title": "Hundredth of goats time?"
             },
             "name": "Goats"
         },
@@ -230,7 +230,7 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "Item get (tadadada!)"
+                        "title": "Small item get (tadadada!)"
                     },
                     {
                         "title": "Rupee Get (HmmHmmHmm!)"
