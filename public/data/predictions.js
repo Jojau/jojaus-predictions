@@ -201,29 +201,6 @@ const data = {
         {
             "auto_predict": {
                 "auto_start": true,
-                "split_name": "BokoDrop"
-            },
-            "data": {
-                "broadcaster_id": "",
-                "outcomes": [
-                    {
-                        "title": "A heart"
-                    },
-                    {
-                        "title": "A blue rupee"
-                    },
-                    {
-                        "title": "Nothing"
-                    }
-                ],
-                "prediction_window": 300,
-                "title": "The boko drops..."
-            },
-            "name": "BokoDrop"
-        },
-        {
-            "auto_predict": {
-                "auto_start": true,
                 "split_name": "EldinVesselPostman"
             },
             "data": {
