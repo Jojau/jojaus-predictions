@@ -153,6 +153,7 @@ io.on('connect', (socket) => {
         user.username = data.username;
         saveUser(user);
         io.to(socket.id).emit("setUsername", { username: user.username });
+        io.local.emit("updateLeaderboard", { users: users });
     })
 
     // ANCHOR PLACING BET
