@@ -9,20 +9,20 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "26cm"
+                        "title": "26"
                     },
                     {
-                        "title": "27cm"
+                        "title": "27"
                     },
                     {
-                        "title": "28cm"
+                        "title": "28"
                     },
                     {
-                        "title": "29cm"
+                        "title": "29"
                     }
                 ],
                 "prediction_window": 300,
-                "title": "Size of the 1st fish?"
+                "title": "Size of the 1st fish? (cm)"
             },
             "name": "Fish1"
         },
@@ -35,20 +35,20 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "26cm"
+                        "title": "26"
                     },
                     {
-                        "title": "27cm"
+                        "title": "27"
                     },
                     {
-                        "title": "28cm"
+                        "title": "28"
                     },
                     {
-                        "title": "29cm"
+                        "title": "29"
                     }
                 ],
                 "prediction_window": 300,
-                "title": "Size of the 2nd fish?"
+                "title": "Size of the 2nd fish? (cm)"
             },
             "name": "Fish2"
         },
@@ -97,24 +97,22 @@ const data = {
         {
             "auto_predict": {
                 "auto_start": true,
-                "split_name": "ZeldaBirds"
+                "split_name": "SewersMidnaText"
             },
             "data": {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "Yes",
-                        "fixedOdds": 10
+                        "title": "Yes"
                     },
                     {
-                        "title": "No",
-                        "fixedOdds": 1.11
+                        "title": "No"
                     }
                 ],
                 "prediction_window": 300,
-                "title": "Will I get hit by a bird on the rooftops?"
+                "title": "Skipping Midna text in the tower staircase?"
             },
-            "name": "ZeldaBirds"
+            "name": "SewersMidnaText"
         },
         {
             "auto_predict": {
@@ -164,7 +162,7 @@ const data = {
                     }
                 ],
                 "prediction_window": 300,
-                "title": "Backflip?"
+                "title": "Post Faron Twilight Backflip?"
             },
             "name": "PostFaronTwilightBackflip"
         },
@@ -189,12 +187,12 @@ const data = {
                         "fixedOdds": 3.33
                     },
                     {
-                        "title": ">=5",
+                        "title": "5 or more",
                         "fixedOdds": 10
                     }
                 ],
                 "prediction_window": 300,
-                "title": "Ook hops?"
+                "title": "Number of Ook hops?"
             },
             "name": "OokHops"
         },
@@ -207,10 +205,10 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "Small item get (tadadada!)"
+                        "title": "Rupee Get (HmmHmmHmm!)"
                     },
                     {
-                        "title": "Rupee Get (HmmHmmHmm!)"
+                        "title": "Small item get (tatadada!)"
                     }
                 ],
                 "prediction_window": 300,
@@ -247,6 +245,537 @@ const data = {
                 "title": "Successful sidehop through Lanayru Gate?"
             },
             "name": "LanayruGateSidehop"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "SteamWait"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Yes"
+                    },
+                    {
+                        "title": "No"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Will I have to wait for the steam?"
+            },
+            "name": "SteamWait"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "RupeeFall"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Yes"
+                    },
+                    {
+                        "title": "No"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Will I fall on the rupee?"
+            },
+            "name": "RupeeFall"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "ZoraArmourPostman"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Rupee Get (HmmHmmHmm!)"
+                    },
+                    {
+                        "title": "Item get (tadadada!)"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "The postman sings..."
+            },
+            "name": "ZoraArmourPostman"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "EscortRupees"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Odd"
+                    },
+                    {
+                        "title": "Even"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Number of rupees after the escort?"
+            },
+            "name": "EscortRupees"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "IzaMessengerRevives"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "No"
+                    },
+                    {
+                        "title": "1x"
+                    },
+                    {
+                        "title": "2x or more"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Reviving twilit messenger in front of Iza?"
+            },
+            "name": "IzaMessengerRevives"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "BoDodges"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "0x \ud83d\ude0d"
+                    },
+                    {
+                        "title": "1x -> 4x"
+                    },
+                    {
+                        "title": "5x or more"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Bo dodges"
+            },
+            "name": "BoDodges"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "GeleeJump"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Yes"
+                    },
+                    {
+                        "title": "No"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "The chu jumps down during the cutscene?"
+            },
+            "name": "GeleeJump"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "MorpheelPillars"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "0"
+                    },
+                    {
+                        "title": "1"
+                    },
+                    {
+                        "title": "2"
+                    },
+                    {
+                        "title": "3"
+                    },
+                    {
+                        "title": "4 or more"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Pillars destroyed by Morpheel during cutscene"
+            },
+            "name": "MorpheelPillars"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "Yeto"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "huh HUH huh!"
+                    },
+                    {
+                        "title": "HUH huh hu-huh!"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Yeto sings..."
+            },
+            "name": "Yeto"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "BoostBombs"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Odd"
+                    },
+                    {
+                        "title": "Even"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Number of bombs after bomb boost?"
+            },
+            "name": "BoostBombs"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "Poe4"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "North"
+                    },
+                    {
+                        "title": "East"
+                    },
+                    {
+                        "title": "South"
+                    },
+                    {
+                        "title": "West"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "First poe to attack?"
+            },
+            "name": "Poe4"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "DeathSwordSpin"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Clockwise"
+                    },
+                    {
+                        "title": "Anti-clockwise"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Death Sword flies..."
+            },
+            "name": "DeathSwordSpin"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "SouthWind"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Yes"
+                    },
+                    {
+                        "title": "No"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Fighting against the wind? (south area)"
+            },
+            "name": "SouthWind"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "EastWind"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Yes"
+                    },
+                    {
+                        "title": "No"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Fighting against the wind? (east area)"
+            },
+            "name": "EastWind"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "WestWind"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Yes"
+                    },
+                    {
+                        "title": "No"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Fighting against the wind? (west area)"
+            },
+            "name": "WestWind"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "Aeralfos"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "South - Left"
+                    },
+                    {
+                        "title": "West - Center"
+                    },
+                    {
+                        "title": "North - Right"
+                    },
+                    {
+                        "title": "Aeralfos skip \ud83d\ude0e"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "By which window will the Aeralfos attack?"
+            },
+            "name": "Aeralfos"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "ArgorokSpin"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Clockwise"
+                    },
+                    {
+                        "title": "Anti-clockwise"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Argorok flies..."
+            },
+            "name": "ArgorokSpin"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "EastZantHead"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Left"
+                    },
+                    {
+                        "title": "Right"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Zant head spawn in east wing first room?"
+            },
+            "name": "EastZantHead"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "WestZantHead"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "1st platform"
+                    },
+                    {
+                        "title": "3rd platform"
+                    },
+                    {
+                        "title": "Left"
+                    },
+                    {
+                        "title": "Center"
+                    },
+                    {
+                        "title": "Right"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Zant head spawn in west wing first room?"
+            },
+            "name": "WestZantHead"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "OutsideZantHead"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Left"
+                    },
+                    {
+                        "title": "Right"
+                    },
+                    {
+                        "title": "Center"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Zant head spawn on the south platform outside"
+            },
+            "name": "OutsideZantHead"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "ZantFairy"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Nothing"
+                    },
+                    {
+                        "title": "A red rupee"
+                    },
+                    {
+                        "title": "A fairy"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "The right pot of the boss door contains..."
+            },
+            "name": "ZantFairy"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "HyruleCastlePostman"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "Rupee Get (HmmHmmHmm!)"
+                    },
+                    {
+                        "title": "Item get (tadadada!)"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "The postman sings..."
+            },
+            "name": "HyruleCastlePostman"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "AeralfosDrop"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "0"
+                    },
+                    {
+                        "title": "1"
+                    },
+                    {
+                        "title": "3"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Number of hearts dropped by the Aeralfos?"
+            },
+            "name": "AeralfosDrop"
+        },
+        {
+            "auto_predict": {
+                "auto_start": true,
+                "split_name": "ZeldaCycles"
+            },
+            "data": {
+                "broadcaster_id": "",
+                "outcomes": [
+                    {
+                        "title": "7"
+                    },
+                    {
+                        "title": "8"
+                    },
+                    {
+                        "title": "9"
+                    },
+                    {
+                        "title": "Two-digits"
+                    }
+                ],
+                "prediction_window": 300,
+                "title": "Number of Zelda cycles?"
+            },
+            "name": "ZeldaCycles"
         }
     ]
 }
