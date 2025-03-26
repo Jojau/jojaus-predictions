@@ -103,12 +103,10 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "Yes",
-                        "fixedOdds": 1.43
+                        "title": "Yes"
                     },
                     {
-                        "title": "No",
-                        "fixedOdds": 3.33
+                        "title": "No"
                     }
                 ],
                 "prediction_window": 300,
@@ -142,7 +140,7 @@ const data = {
                     }
                 ],
                 "prediction_window": 300,
-                "title": "How many times will I have to revive Jamal?"
+                "title": "Reviving Jamal?"
             },
             "name": "JamalRevives"
         },
@@ -264,7 +262,7 @@ const data = {
                     }
                 ],
                 "prediction_window": 300,
-                "title": "Will I have to wait for the geyser to stop?"
+                "title": "Will I have to wait for the steam?"
             },
             "name": "SteamWait"
         },
@@ -277,12 +275,10 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "Yes",
-                        "fixedOdds": 1.5
+                        "title": "Yes"
                     },
                     {
-                        "title": "No",
-                        "fixedOdds": 3
+                        "title": "No"
                     }
                 ],
                 "prediction_window": 300,
@@ -339,13 +335,14 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "No",
-                        "fixedOdds": 1.67
+                        "title": "No"
                     },
                     {
-                        "title": "Yes",
-                        "fixedOdds": 2.5
+                        "title": "1x"
                     },
+                    {
+                        "title": "2x or more"
+                    }
                 ],
                 "prediction_window": 300,
                 "title": "Reviving twilit messenger in front of Iza?"
@@ -355,28 +352,25 @@ const data = {
         {
             "auto_predict": {
                 "auto_start": true,
-                "split_name": "BoGrabs"
+                "split_name": "BoDodges"
             },
             "data": {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "0x \ud83d\ude0d",
-                        "fixedOdds": 4
+                        "title": "0x \ud83d\ude0d"
                     },
                     {
-                        "title": "1x -> 4x",
-                        "fixedOdds": 2
+                        "title": "1x -> 4x"
                     },
                     {
-                        "title": "5x or more 😭",
-                        "fixedOdds": 4
+                        "title": "5x or more"
                     }
                 ],
                 "prediction_window": 300,
-                "title": "How many times will I get grabbed by Bo?"
+                "title": "Bo dodges"
             },
-            "name": "BoGrabs"
+            "name": "BoDodges"
         },
         {
             "auto_predict": {
@@ -394,7 +388,7 @@ const data = {
                     }
                 ],
                 "prediction_window": 300,
-                "title": "Will the chu jump during the cutscene?"
+                "title": "The chu jumps down during the cutscene?"
             },
             "name": "GeleeJump"
         },
@@ -423,7 +417,7 @@ const data = {
                     }
                 ],
                 "prediction_window": 300,
-                "title": "Pillars destroyed by Morpheel during ending cutscene"
+                "title": "Pillars destroyed by Morpheel during cutscene"
             },
             "name": "MorpheelPillars"
         },
@@ -542,12 +536,10 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "Yes",
-                        "fixedOdds": 1.33
+                        "title": "Yes"
                     },
                     {
-                        "title": "No",
-                        "fixedOdds": 4
+                        "title": "No"
                     }
                 ],
                 "prediction_window": 300,
@@ -584,20 +576,16 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "South (Left)",
-                        "fixedOdds": 3.33
+                        "title": "South - Left"
                     },
                     {
-                        "title": "West (Center)",
-                        "fixedOdds": 3.33
+                        "title": "West - Center"
                     },
                     {
-                        "title": "North (Right)",
-                        "fixedOdds": 3.33
+                        "title": "North - Right"
                     },
                     {
-                        "title": "Aeralfos skip \ud83d\ude0e",
-                        "fixedOdds": 10
+                        "title": "Aeralfos skip \ud83d\ude0e"
                     }
                 ],
                 "prediction_window": 300,
@@ -614,10 +602,10 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "Clockwise (left)"
+                        "title": "Clockwise"
                     },
                     {
-                        "title": "Anti-clockwise (right)"
+                        "title": "Anti-clockwise"
                     }
                 ],
                 "prediction_window": 300,
@@ -654,7 +642,7 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "1st platform (closest)"
+                        "title": "1st platform"
                     },
                     {
                         "title": "3rd platform"
@@ -706,16 +694,13 @@ const data = {
                 "broadcaster_id": "",
                 "outcomes": [
                     {
-                        "title": "Nothing",
-                        "fixedOdds": 2.5
+                        "title": "Nothing"
                     },
                     {
-                        "title": "A red rupee",
-                        "fixedOdds": 2.5
+                        "title": "A red rupee"
                     },
                     {
-                        "title": "A fairy",
-                        "fixedOdds": 5
+                        "title": "A fairy"
                     }
                 ],
                 "prediction_window": 300,
