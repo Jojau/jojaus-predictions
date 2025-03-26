@@ -251,7 +251,8 @@ input {
                     justify-content: center;
                     align-items: stretch;
                     flex-wrap: wrap;
-                    gap: 16px;
+                    row-gap: 16px;
+                    column-gap: 16px;
 
                     h5 {
                         font-size: 16px;
@@ -291,7 +292,6 @@ input {
     }
 
     #leaderboardContainer {
-        margin: 0;
         padding: 24px 48px;
         background-color: $dark;
         display: flex;
@@ -309,31 +309,11 @@ input {
         }
     }
 
-    #links{
-
-        #linksContainer {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-
-            a {
-                color: $fluo-green;
-
-                &:visited{
-                    color: $light-green;
-                }
-            }
-        }
-    }
-
     footer {
         display: flex;
         align-items: center;
+        column-gap: 8px;
         justify-content: center;
-        flex-wrap: wrap;
-        gap: 8px;
 
         img {
             height: 50px;
@@ -379,7 +359,8 @@ input {
     #currentPredictionsContainer {
         display: flex;
         flex-wrap: wrap;
-        gap: 48px;
+        column-gap: 48px;
+        row-gap: 48px;
 
         .currentPrediction {
             background: $dark;
@@ -403,7 +384,8 @@ input {
 
             .outcomeContainer {
                 display: flex;
-                gap: 16px;
+                column-gap: 16px;
+                row-gap: 16px;
             }
 
             .currentPredictionOutcome {

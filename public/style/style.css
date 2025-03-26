@@ -190,7 +190,9 @@ input {
   justify-content: center;
   align-items: stretch;
   flex-wrap: wrap;
-  gap: 16px;
+  row-gap: 16px;
+  -moz-column-gap: 16px;
+       column-gap: 16px;
 }
 #mainContainer #predictions #predictionsContainer .currentPrediction .outcomes h5 {
   font-size: 16px;
@@ -221,7 +223,6 @@ input {
   overflow: auto;
 }
 #mainContainer #leaderboardContainer {
-  margin: 0;
   padding: 24px 48px;
   background-color: #1D2922;
   display: flex;
@@ -237,25 +238,12 @@ input {
   max-width: calc(100% - 100px);
   vertical-align: bottom;
 }
-#mainContainer #links #linksContainer {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-#mainContainer #links #linksContainer a {
-  color: #16DB65;
-}
-#mainContainer #links #linksContainer a:visited {
-  color: #058C42;
-}
 #mainContainer footer {
   display: flex;
   align-items: center;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
 }
 #mainContainer footer img {
   height: 50px;
@@ -292,7 +280,9 @@ input {
 #adminContainer #currentPredictionsContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 48px;
+  -moz-column-gap: 48px;
+       column-gap: 48px;
+  row-gap: 48px;
 }
 #adminContainer #currentPredictionsContainer .currentPrediction {
   background: #1D2922;
@@ -313,7 +303,9 @@ input {
 }
 #adminContainer #currentPredictionsContainer .currentPrediction .outcomeContainer {
   display: flex;
-  gap: 16px;
+  -moz-column-gap: 16px;
+       column-gap: 16px;
+  row-gap: 16px;
 }
 #adminContainer #currentPredictionsContainer .currentPrediction .currentPredictionOutcome .title {
   text-align: center;
