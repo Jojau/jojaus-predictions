@@ -1,27 +1,18 @@
-//ANCHOR - Imports (external)
+//ANCHOR - Imports
 const express = require('express');
 const { createServer } = require('node:http');
 const { join } = require('node:path');
-
 const { Server } = require('socket.io');
-
-const { setTimeout } = require("timers/promises");
-
 const bcrypt = require('bcrypt');
+const { setTimeout } = require("timers/promises");
 const crypto = require("crypto");
 const randomId = () => crypto.randomBytes(8).toString("hex");
-
-const StreamerbotClient = require('@streamerbot/client').StreamerbotClient;
-
-// ANCHOR IMPORTS (internal)
 const { InMemorySessionStore } = require("./sessionStore");
 const sessionStore = new InMemorySessionStore();
 
-// ANCHOR INITIALISE SERVERS
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
-const streamerBotClient = new StreamerbotClient();
 
 const PORT = process.env.PORT || 3000;
 
@@ -257,16 +248,8 @@ adminNamespace.on("connection", socket => {
     socket.on("startPrediction", (data) => {
         console.log("Started prediction " + data.prediction.name);
         calculateOdds(data.prediction);
-        currentPredictions.push(data.prediction);
-        io.local.emit("displayCurrentPredictions", { currentPredictions: currentPredictions });
-
-        streamerBotClient.doAction(
-            "d564ca82-ec58-499d-aa95-2a31047317f4",
-            {
-                "predictionName": data.prediction.data.title,
-                "predictionOutcomes": data.prediction.data.outcomes.map(item => item.title).join(' / ')
-            }
-        );
+        currentPredictions.push(data.prediction)
+        io.local.emit("displayCurrentPredictions", { currentPredictions: currentPredictions })
     })
 
     // ANCHOR SET "CLOSING SOON"

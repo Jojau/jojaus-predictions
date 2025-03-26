@@ -9,7 +9,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@streamerbot/client": "^1.9.5",
     "bcrypt": "^5.1.1",
     "crypto": "^1.0.1",
     "express": "^4.21.2",
