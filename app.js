@@ -1,4 +1,7 @@
+require('dotenv').config();
+
 //ANCHOR - Imports
+// External libraries
 const express = require('express');
 const { createServer } = require('node:http');
 const { join } = require('node:path');
@@ -7,9 +10,14 @@ const bcrypt = require('bcrypt');
 const { setTimeout } = require("timers/promises");
 const crypto = require("crypto");
 const randomId = () => crypto.randomBytes(8).toString("hex");
+
+// Internal files
 const { InMemorySessionStore } = require("./sessionStore");
 const sessionStore = new InMemorySessionStore();
+const { TwitchAPI } = require('./twitchAPI');
+const twitchAPI = new TwitchAPI();
 
+// ANCHOR INITIALISING SERVER
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
@@ -248,8 +256,9 @@ adminNamespace.on("connection", socket => {
     socket.on("startPrediction", (data) => {
         console.log("Started prediction " + data.prediction.name);
         calculateOdds(data.prediction);
-        currentPredictions.push(data.prediction)
-        io.local.emit("displayCurrentPredictions", { currentPredictions: currentPredictions })
+        currentPredictions.push(data.prediction);
+        io.local.emit("displayCurrentPredictions", { currentPredictions: currentPredictions });
+        twitchAPI.sendAnnouncement("A new prediction started! " + data.prediction.data.title + " (" + data.prediction.data.outcomes.map(item => item.title).join(' / ') + ")");
     })
 
     // ANCHOR SET "CLOSING SOON"
