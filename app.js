@@ -162,6 +162,7 @@ io.on('connect', (socket) => {
         saveUser(user);
         io.to(socket.id).emit("setUsername", { username: user.username });
         io.local.emit("updateLeaderboard", { users: users });
+        io.local.emit("displayCurrentPredictions", { currentPredictions: currentPredictions })
     })
 
     // ANCHOR PLACING BET
@@ -192,7 +193,7 @@ io.on('connect', (socket) => {
             });
         }
         calculateOdds(predictionToUpdate);
-        io.local.emit("displayCurrentPredictions", { currentPredictions: currentPredictions })
+        io.local.emit("displayCurrentPredictions", { currentPredictions: currentPredictions });
     })
 
     // ANCHOR PREDICTION CANCELLED (Getting points back)
