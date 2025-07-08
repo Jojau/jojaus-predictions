@@ -13,46 +13,66 @@
 <body>
     <!-- SECTION HTML -->
     <div class="container" id="mainContainer">
-        <h1>Jojau's predictions</h1>
 
-        <!-- ANCHOR USER INFO -->
-        <div id="userInfo">
-            <h2>Your profile</h2>
-            <div>
-                <div>
-                    <p><strong>Username</strong><br /><span id="username"></span></p>
-                    <p><strong>Points</strong><br /><span id="userPoints"></span></p>
+        <!-- ANCHOR HEADER -->
+        <header>
+            <h1>Jojau's predictions</h1>
+        </header>
+
+        <!-- ANCHOR TWITCH STREAM -->
+        <div id="twitchContainer">
+            <!-- Add a placeholder for the Twitch embed -->
+            <div id="twitch-embed"></div>
+        </div>
+
+        <div id="predictionsGameContainer">
+            <!-- ANCHOR CURRENT PREDICTIONS -->
+            <div id="predictions">
+                <h2>
+                    Current prediction(s)
+                </h2>
+                <p>Currently using: <span id="mode"></span></p>
+
+                <div id="predictionsContainer">
+
                 </div>
+            </div>
 
-                <div>
-                    <label for="inputUsername">Change your username</label>
-                    <div id="userForm">
-                        <input type="text" name="username" id="inputUsername">
-                        <button id="buttonUsername">OK</button>
+            <div id="users">
+                <!-- ANCHOR USER INFO -->
+                <div id="userInfo">
+                    <h2>Your profile</h2>
+                    <div>
+                        <div>
+                            <p><strong>Username</strong><br /><span id="username"></span></p>
+                            <p><strong>Points</strong><br /><span id="userPoints"></span></p>
+                        </div>
+
+                        <div>
+                            <label for="inputUsername">Change your username</label>
+                            <div id="userForm">
+                                <input type="text" name="username" id="inputUsername">
+                                <button id="buttonUsername">OK</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                
+                <!-- ANCHOR Leaderboard -->
+                <div id="leaderboard">
+                    <h2>Leaderboard</h2>
+                    <ol id="leaderboardContainer">
+
+                    </ol>
+                </div>
             </div>
         </div>
 
-        <!-- ANCHOR CURRENT PREDICTIONS -->
-        <div id="predictions">
-            <h2>
-                Current prediction(s)
-            </h2>
-            <p>Currently using: <span id="mode"></span></p>
 
-            <div id="predictionsContainer">
 
-            </div>
-        </div>
 
-        <!-- ANCHOR Leaderboard -->
-        <div id="leaderboard">
-            <h2>Leaderboard</h2>
-            <ol id="leaderboardContainer">
 
-            </ol>
-        </div>
+
 
         <div id="links">
             <h2>External links</h2>
@@ -109,6 +129,19 @@
     <!-- !SECTION -->
 
     <!-- SECTION SCRIPT -->
+
+    <!-- Load the Twitch embed JavaScript file -->
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+    <!-- Create a Twitch.Embed object that will render within the "twitch-embed" element -->
+    <script type="text/javascript">
+        new Twitch.Embed("twitch-embed", {
+            width: '100%',
+            height: 640,
+            channel: "jojau",
+            theme: "dark"
+        });
+    </script>
+
     <script>
         window.addEventListener('load', () => {
             const socket = new io();
