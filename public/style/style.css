@@ -193,6 +193,9 @@ input {
   -moz-column-gap: 8px;
        column-gap: 8px;
 }
+#mainContainer #predictionsGameContainer #predictions #predictionsContainer .currentPrediction.open .outcomes .outcome .betContainer, #mainContainer #predictionsGameContainer #predictions #predictionsContainer .currentPrediction.closing-soon .outcomes .outcome .betContainer {
+  display: flex;
+}
 #mainContainer #predictionsGameContainer #predictions #predictionsContainer .currentPrediction.closing-soon .status {
   background-color: #FFB000;
   color: #020202;
@@ -240,6 +243,15 @@ input {
 }
 #mainContainer #predictionsGameContainer #predictions #predictionsContainer .currentPrediction .outcomes .outcome .buttons {
   display: none;
+}
+#mainContainer #predictionsGameContainer #predictions #predictionsContainer .currentPrediction .outcomes .outcome .betContainer {
+  margin-top: 8px;
+  display: none;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+}
+#mainContainer #predictionsGameContainer #predictions #predictionsContainer .currentPrediction .outcomes .outcome .betContainer input[name=customBet] {
+  flex: 1 1 100%;
 }
 #mainContainer #predictionsGameContainer #predictions #predictionsContainer .currentPrediction .outcomes .outcome .betters {
   margin: 0;

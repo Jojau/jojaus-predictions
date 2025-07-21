@@ -174,7 +174,7 @@ io.on('connect', (socket) => {
             return;
         }
 
-        if (user.points < Number(data.betValue)) {
+        if (Number(data.betValue) < 0 || user.points < Number(data.betValue)) {
             return;
         }
         user.points -= Number(data.betValue);

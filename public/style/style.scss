@@ -244,6 +244,10 @@ input {
                                 justify-content: center;
                                 column-gap: 8px;
                             }
+
+                            .betContainer {
+                                display: flex;
+                            }
                         }
                     }
 
@@ -307,6 +311,16 @@ input {
 
                             .buttons {
                                 display: none;
+                            }
+
+                            .betContainer {
+                                margin-top: 8px;
+                                display: none; //flex
+                                column-gap: 8px;
+
+                                input[name="customBet"] {
+                                    flex: 1 1 100%;
+                                }
                             }
 
                             .betters {
