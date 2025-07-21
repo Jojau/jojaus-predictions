@@ -54,7 +54,7 @@ class TwitchAPI {
             })
             .catch((error) => {
                 console.log(error);
-                return false;
+                this.sendChatMessage(message);
             });
     }
 }
