@@ -244,7 +244,7 @@ adminNamespace.on("connection", socket => {
     // ANCHOR SWITCH MODE
     socket.on("switchMode", (data) => {
         useFixedOdds = !useFixedOdds;
-        console.log("Mode switched to " + useFixedOdds ? 'fixed odds' : 'chat odds');
+        console.log("Mode switched to " + ( useFixedOdds ? 'fixed odds' : 'chat odds' ));
         io.local.emit("updateMode", { useFixedOdds: useFixedOdds });
 
         currentPredictions.forEach(prediction => {
