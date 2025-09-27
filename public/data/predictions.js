@@ -578,36 +578,6 @@ const data = {
         {
             "auto_predict": {
                 "auto_start": true,
-                "split_name": "Aeralfos"
-            },
-            "data": {
-                "broadcaster_id": "",
-                "outcomes": [
-                    {
-                        "title": "South (Left)",
-                        "fixedOdds": 3.33
-                    },
-                    {
-                        "title": "West (Center)",
-                        "fixedOdds": 3.33
-                    },
-                    {
-                        "title": "North (Right)",
-                        "fixedOdds": 3.33
-                    },
-                    {
-                        "title": "Aeralfos skip \ud83d\ude0e",
-                        "fixedOdds": 10
-                    }
-                ],
-                "prediction_window": 300,
-                "title": "By which window will the Aeralfos attack?"
-            },
-            "name": "Aeralfos"
-        },
-        {
-            "auto_predict": {
-                "auto_start": true,
                 "split_name": "ArgorokSpin"
             },
             "data": {
