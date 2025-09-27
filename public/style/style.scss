@@ -382,6 +382,12 @@ input {
     row-gap: 48px;
     font-size: large;
 
+    #optionsContainer{
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+    }
+
     #content {
         display: flex;
         column-gap: 48px;

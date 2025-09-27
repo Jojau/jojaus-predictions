@@ -294,6 +294,11 @@ input {
   row-gap: 48px;
   font-size: large;
 }
+#adminContainer #optionsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
 #adminContainer #content {
   display: flex;
   -moz-column-gap: 48px;

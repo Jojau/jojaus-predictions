@@ -14,17 +14,22 @@
     <!-- SECTION HTML -->
     <div id="adminContainer" class="container">
         <h1>Admin panel</h1>
-
-        <!-- ANCHOR SWITCH MODE -->
-        <div id="modeContainer">
-            <p><strong>Current mode</strong><br /><span id="mode"></span></p>
-            <button id="switchMode">Switch</button>
-        </div>
-
-        <!-- ANCHOR SWITCH TWITCH -->
-        <div id="modeContainer">
-            <p><strong>Twitch activated:</strong><br /><span id="twitch"></span></p>
-            <button id="switchTwitch">Switch</button>
+        
+        <div>
+            <h2>Options</h2>
+            <div id="optionsContainer">
+                <!-- ANCHOR SWITCH MODE -->
+                <div class="option">
+                    <p><strong>Current mode</strong><br /><span id="mode"></span></p>
+                    <button id="switchMode">Switch</button>
+                </div>
+                
+                <!-- ANCHOR SWITCH TWITCH -->
+                <div class="option">
+                    <p><strong>Twitch activated:</strong><br /><span id="twitch"></span></p>
+                    <button id="switchTwitch">Switch</button>
+                </div>
+            </div>
         </div>
 
         <div id="content">
