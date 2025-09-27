@@ -18,10 +18,10 @@ const app = express();
 const server = createServer(app);
 const PORT = process.env.PORT || 3000;
 
-// Initialize services
+// ANCHOR Initialise services
 const twitchAPI = new TwitchAPI();
 
-// Initialize Socket.IO handlers
+// ANCHOR Initialise Socket.IO handlers
 const socketManager = new SocketManager(server);
 const mainSocketHandler = new MainSocketHandler(socketManager);
 const adminSocketHandler = new AdminSocketHandler(socketManager, twitchAPI);
