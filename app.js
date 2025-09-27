@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
 
 // Internal files
 const { TwitchAPI } = require('./src/services/TwitchAPI');
+const { MongoDBService } = require('./src/services/MongoDB');
 const { SocketManager } = require('./src/socket/SocketManager');
 const { MainSocketHandler } = require('./src/socket/MainSocketHandler');
 const { AdminSocketHandler } = require('./src/socket/AdminSocketHandler');
@@ -19,6 +20,8 @@ const server = createServer(app);
 const PORT = process.env.PORT || 3000;
 
 // ANCHOR Initialise services
+const mongoDBService = new MongoDBService();
+mongoDBService.connect().catch(console.error);
 const twitchAPI = new TwitchAPI();
 
 // ANCHOR Initialise Socket.IO handlers
