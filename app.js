@@ -29,6 +29,7 @@ var number = 0;
 var users = [];
 var currentPredictions = []
 var useFixedOdds = true;
+var useTwitch = false;
 
 //ANCHOR - Routes
 function authentication(req, res, next) {
@@ -240,6 +241,7 @@ adminNamespace.use((socket, next) => {
 adminNamespace.on("connection", socket => {
     socket.emit("displayCurrentPredictions", { currentPredictions: currentPredictions })
     io.local.emit("updateMode", { useFixedOdds: useFixedOdds });
+    io.local.emit("updateTwitch", { useTwitch: useTwitch });
 
     // ANCHOR SWITCH MODE
     socket.on("switchMode", (data) => {
@@ -253,13 +255,20 @@ adminNamespace.on("connection", socket => {
         io.local.emit("displayCurrentPredictions", { currentPredictions: currentPredictions })
     })
 
+    // ANCHOR SWITCH MODE
+    socket.on("switchTwitch", (data) => {
+        useTwitch = !useTwitch;
+        console.log("Twitch " + ( useTwitch ? 'activated' : 'deactivated' ));
+        io.local.emit("updateTwitch", { useTwitch: useTwitch });
+    })
+
     // ANCHOR START A PREDICTION
     socket.on("startPrediction", (data) => {
         console.log("Started prediction " + data.prediction.name);
         calculateOdds(data.prediction);
         currentPredictions.push(data.prediction);
         io.local.emit("displayCurrentPredictions", { currentPredictions: currentPredictions });
-        twitchAPI.sendAnnouncement("A new prediction started! " + data.prediction.data.title + " (" + data.prediction.data.outcomes.map(item => item.title).join(' / ') + ")");
+        if(useTwitch) twitchAPI.sendAnnouncement("A new prediction started! " + data.prediction.data.title + " (" + data.prediction.data.outcomes.map(item => item.title).join(' / ') + ")");
     })
 
     // ANCHOR SET "CLOSING SOON"

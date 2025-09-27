@@ -21,6 +21,12 @@
             <button id="switchMode">Switch</button>
         </div>
 
+        <!-- ANCHOR SWITCH TWITCH -->
+        <div id="modeContainer">
+            <p><strong>Twitch activated:</strong><br /><span id="twitch"></span></p>
+            <button id="switchTwitch">Switch</button>
+        </div>
+
         <div id="content">
             <!-- ANCHOR PREDICTIONS LIST -->
             <aside id="predictionsList">
@@ -93,6 +99,16 @@
             })
             socket.on("updateMode", function (data) {
                 modeSpan.textContent = data.useFixedOdds ? 'Fixed odds' : 'Chat odds';
+            })
+
+            // ANCHOR CHANGE TWITCH
+            const switchTwitchButton = document.getElementById("switchTwitch");
+            const twitchSpan = document.getElementById("twitch");
+            switchTwitchButton.addEventListener('click', () => {
+                adminSocket.emit('switchTwitch');
+            })
+            socket.on("updateTwitch", function (data) {
+                twitchSpan.textContent = data.useTwitch ? 'Yes' : 'No';
             })
 
             // ANCHOR START PREDICTION
