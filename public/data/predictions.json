@@ -1,0 +1,358 @@
+{
+  "predictions": [
+    {
+      "name": "Fish1",
+      "data": {
+        "title": "Size of the 1st fish? (cm)",
+        "outcomes": [
+          { "_id": 0, "title": "26" },
+          { "_id": 1, "title": "27" },
+          { "_id": 2, "title": "28" },
+          { "_id": 3, "title": "29" }
+        ]
+      }
+    },
+    {
+      "name": "Fish2",
+      "data": {
+        "title": "Size of the 2nd fish? (cm)",
+        "outcomes": [
+          { "_id": 0, "title": "26" },
+          { "_id": 1, "title": "27" },
+          { "_id": 2, "title": "28" },
+          { "_id": 3, "title": "29" }
+        ]
+      }
+    },
+    {
+      "name": "StoneRupee",
+      "data": {
+        "title": "What's under the stone?",
+        "outcomes": [
+          { "_id": 0, "title": "A green rupee", "fixedOdds": 1.25 },
+          { "_id": 1, "title": "Nothing", "fixedOdds": 5 }
+        ]
+      }
+    },
+    {
+      "name": "Goats",
+      "data": {
+        "title": "Hundredth of goats time?",
+        "outcomes": [
+          { "_id": 0, "title": "Odd" },
+          { "_id": 1, "title": "Even" }
+        ]
+      }
+    },
+    {
+      "name": "SewersMidnaText",
+      "data": {
+        "title": "Skipping Midna text in the tower staircase?",
+        "outcomes": [
+          { "_id": 0, "title": "Yes", "fixedOdds": 1.43 },
+          { "_id": 1, "title": "No", "fixedOdds": 3.33 }
+        ]
+      }
+    },
+    {
+      "name": "JamalRevives",
+      "data": {
+        "title": "How many times will I have to revive Jamal?",
+        "outcomes": [
+          { "_id": 0, "title": "No 😎", "fixedOdds": 6.3 },
+          { "_id": 1, "title": "1x", "fixedOdds": 2.93 },
+          { "_id": 2, "title": "2x", "fixedOdds": 2.93 },
+          { "_id": 3, "title": "3x or more", "fixedOdds": 6.3 }
+        ]
+      }
+    },
+    {
+      "name": "PostFaronTwilightBackflip",
+      "data": {
+        "title": "Post Faron Twilight Backflip?",
+        "outcomes": [
+          { "_id": 0, "title": "Yes", "fixedOdds": 4.35 },
+          { "_id": 1, "title": "No", "fixedOdds": 1.3 }
+        ]
+      }
+    },
+    {
+      "name": "OokHops",
+      "data": {
+        "title": "Number of Ook hops?",
+        "outcomes": [
+          { "_id": 0, "title": "2", "fixedOdds": 3.33 },
+          { "_id": 1, "title": "3", "fixedOdds": 3.33 },
+          { "_id": 2, "title": "4", "fixedOdds": 3.33 },
+          { "_id": 3, "title": "5 or more", "fixedOdds": 10 }
+        ]
+      }
+    },
+    {
+      "name": "EldinVesselPostman",
+      "data": {
+        "title": "The postman sings...",
+        "outcomes": [
+          { "_id": 0, "title": "Rupee Get (HmmHmmHmm!)" },
+          { "_id": 1, "title": "Small item get (tatadada!)" }
+        ]
+      }
+    },
+    {
+      "name": "LanayruGateSidehop",
+      "data": {
+        "title": "Successful sidehop through Lanayru Gate?",
+        "outcomes": [
+          { "_id": 0, "title": "#1", "fixedOdds": 6.3 },
+          { "_id": 1, "title": "#2", "fixedOdds": 2.93 },
+          { "_id": 2, "title": "#3", "fixedOdds": 2.93 },
+          { "_id": 3, "title": "#4", "fixedOdds": 6.3 }
+        ]
+      }
+    },
+    {
+      "name": "SteamWait",
+      "data": {
+        "title": "Will I have to wait for the geyser to stop?",
+        "outcomes": [
+          { "_id": 0, "title": "Yes" },
+          { "_id": 1, "title": "No" }
+        ]
+      }
+    },
+    {
+      "name": "RupeeFall",
+      "data": {
+        "title": "Will I fall on the rupee?",
+        "outcomes": [
+          { "_id": 0, "title": "Yes", "fixedOdds": 1.5 },
+          { "_id": 1, "title": "No", "fixedOdds": 3 }
+        ]
+      }
+    },
+    {
+      "name": "ZoraArmourPostman",
+      "data": {
+        "title": "The postman sings...",
+        "outcomes": [
+          { "_id": 0, "title": "Rupee Get (HmmHmmHmm!)" },
+          { "_id": 1, "title": "Item get (tadadada!)" }
+        ]
+      }
+    },
+    {
+      "name": "EscortRupees",
+      "data": {
+        "title": "Number of rupees after the escort?",
+        "outcomes": [
+          { "_id": 0, "title": "Odd" },
+          { "_id": 1, "title": "Even" }
+        ]
+      }
+    },
+    {
+      "name": "IzaMessengerRevives",
+      "data": {
+        "title": "Reviving twilit messenger in front of Iza?",
+        "outcomes": [
+          { "_id": 0, "title": "No", "fixedOdds": 1.67 },
+          { "_id": 1, "title": "Yes", "fixedOdds": 2.5 }
+        ]
+      }
+    },
+    {
+      "name": "BoGrabs",
+      "data": {
+        "title": "How many times will I get grabbed by Bo?",
+        "outcomes": [
+          { "_id": 0, "title": "0x 😍", "fixedOdds": 4 },
+          { "_id": 1, "title": "1x -> 4x", "fixedOdds": 2 },
+          { "_id": 2, "title": "5x or more 😭", "fixedOdds": 4 }
+        ]
+      }
+    },
+    {
+      "name": "GeleeJump",
+      "data": {
+        "title": "Will the chu jump during the cutscene?",
+        "outcomes": [
+          { "_id": 0, "title": "Yes" },
+          { "_id": 1, "title": "No" }
+        ]
+      }
+    },
+    {
+      "name": "MorpheelPillars",
+      "data": {
+        "title": "Pillars destroyed by Morpheel during ending cutscene",
+        "outcomes": [
+          { "_id": 0, "title": "0" },
+          { "_id": 1, "title": "1" },
+          { "_id": 2, "title": "2" },
+          { "_id": 3, "title": "3" },
+          { "_id": 4, "title": "4 or more" }
+        ]
+      }
+    },
+    {
+      "name": "Yeto",
+      "data": {
+        "title": "Yeto sings...",
+        "outcomes": [
+          { "_id": 0, "title": "huh HUH huh!" },
+          { "_id": 1, "title": "HUH huh hu-huh!" }
+        ]
+      }
+    },
+    {
+      "name": "BoostBombs",
+      "data": {
+        "title": "Number of bombs after bomb boost?",
+        "outcomes": [
+          { "_id": 0, "title": "Odd" },
+          { "_id": 1, "title": "Even" }
+        ]
+      }
+    },
+    {
+      "name": "Poe4",
+      "data": {
+        "title": "First poe to attack?",
+        "outcomes": [
+          { "_id": 0, "title": "North" },
+          { "_id": 1, "title": "East" },
+          { "_id": 2, "title": "South" },
+          { "_id": 3, "title": "West" }
+        ]
+      }
+    },
+    {
+      "name": "DeathSwordSpin",
+      "data": {
+        "title": "Death Sword flies...",
+        "outcomes": [
+          { "_id": 0, "title": "Clockwise" },
+          { "_id": 1, "title": "Anti-clockwise" }
+        ]
+      }
+    },
+    {
+      "name": "SouthWind",
+      "data": {
+        "title": "Fighting against the wind? (south area)",
+        "outcomes": [
+          { "_id": 0, "title": "Yes" },
+          { "_id": 1, "title": "No" }
+        ]
+      }
+    },
+    {
+      "name": "EastWind",
+      "data": {
+        "title": "Fighting against the wind? (east area)",
+        "outcomes": [
+          { "_id": 0, "title": "Yes", "fixedOdds": 1.33 },
+          { "_id": 1, "title": "No", "fixedOdds": 4 }
+        ]
+      }
+    },
+    {
+      "name": "WestWind",
+      "data": {
+        "title": "Fighting against the wind? (west area)",
+        "outcomes": [
+          { "_id": 0, "title": "Yes" },
+          { "_id": 1, "title": "No" }
+        ]
+      }
+    },
+    {
+      "name": "ArgorokSpin",
+      "data": {
+        "title": "Argorok flies...",
+        "outcomes": [
+          { "_id": 0, "title": "Clockwise (left)" },
+          { "_id": 1, "title": "Anti-clockwise (right)" }
+        ]
+      }
+    },
+    {
+      "name": "EastZantHead",
+      "data": {
+        "title": "Zant head spawn in east wing first room?",
+        "outcomes": [
+          { "_id": 0, "title": "Left" },
+          { "_id": 1, "title": "Right" }
+        ]
+      }
+    },
+    {
+      "name": "WestZantHead",
+      "data": {
+        "title": "Zant head spawn in west wing first room?",
+        "outcomes": [
+          { "_id": 0, "title": "1st platform (closest)" },
+          { "_id": 1, "title": "3rd platform" },
+          { "_id": 2, "title": "Left" },
+          { "_id": 3, "title": "Center" },
+          { "_id": 4, "title": "Right" }
+        ]
+      }
+    },
+    {
+      "name": "OutsideZantHead",
+      "data": {
+        "title": "Zant head spawn on the south platform outside",
+        "outcomes": [
+          { "_id": 0, "title": "Left" },
+          { "_id": 1, "title": "Right" },
+          { "_id": 2, "title": "Center" }
+        ]
+      }
+    },
+    {
+      "name": "ZantFairy",
+      "data": {
+        "title": "The right pot of the boss door contains...",
+        "outcomes": [
+          { "_id": 0, "title": "Nothing", "fixedOdds": 2.5 },
+          { "_id": 1, "title": "A red rupee", "fixedOdds": 2.5 },
+          { "_id": 2, "title": "A fairy", "fixedOdds": 5 }
+        ]
+      }
+    },
+    {
+      "name": "HyruleCastlePostman",
+      "data": {
+        "title": "The postman sings...",
+        "outcomes": [
+          { "_id": 0, "title": "Rupee Get (HmmHmmHmm!)" },
+          { "_id": 1, "title": "Item get (tadadada!)" }
+        ]
+      }
+    },
+    {
+      "name": "AeralfosDrop",
+      "data": {
+        "title": "Number of hearts dropped by the Aeralfos?",
+        "outcomes": [
+          { "_id": 0, "title": "0" },
+          { "_id": 1, "title": "1" },
+          { "_id": 2, "title": "3" }
+        ]
+      }
+    },
+    {
+      "name": "ZeldaCycles",
+      "data": {
+        "title": "Number of Zelda cycles?",
+        "outcomes": [
+          { "_id": 0, "title": "7" },
+          { "_id": 1, "title": "8" },
+          { "_id": 2, "title": "9" },
+          { "_id": 3, "title": "Two-digits" }
+        ]
+      }
+    }
+  ]
+}

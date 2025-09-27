@@ -1,8 +1,9 @@
 class AdminSocketHandler {
-    constructor(socketManager, twitchAPI) {
+    constructor(socketManager, twitchAPI, mongoDB) {
         this.manager = socketManager;
         this.io = socketManager.getIO();
         this.twitchAPI = twitchAPI;
+        this.mongoDB = mongoDB;
         this.adminNamespace = this.io.of("/admin");
         
         this.initializeMiddleware();
@@ -27,8 +28,19 @@ class AdminSocketHandler {
         this.setupEventListeners(socket);
     }
 
-    emitInitialState(socket) {
+    async emitInitialState(socket) {
+        // Send all predictions from database
+        try {
+            const predictions = await this.mongoDB.getAllPredictions();
+            this.io.local.emit("displayAllPredictions", { predictions: predictions });
+        } catch (error) {
+            console.error('Error fetching predictions:', error);
+        }
+
+        // Send current predictions (in progress)
         socket.emit("displayCurrentPredictions", { currentPredictions: this.manager.currentPredictions });
+
+        // Send current mode states
         this.io.local.emit("updateMode", { useFixedOdds: this.manager.useFixedOdds });
         this.io.local.emit("updateTwitch", { useTwitch: this.manager.useTwitch });
     }

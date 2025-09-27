@@ -79,7 +79,7 @@
     <!-- !SECTION -->
 
     <!-- SECTION SCRIPTS -->
-    <script src="/data/predictions.js"></script>
+    <!-- <script src="/data/predictions.js"></script> -->
     <script>
         window.addEventListener('load', () => {
             const socket = io();
@@ -88,11 +88,33 @@
             // ANCHOR IMPORTING AND DISPLAYING ALL PREDICTIONS
             const predictionsList = document.getElementById("predictionsList");
             const predictionElmInListTemplate = document.getElementById("predictionElmInListTemplate").content;
-            data.predictions.forEach(prediction => {
-                let predictionElm = predictionElmInListTemplate.cloneNode(true);
-                predictionElm.querySelector(".title").textContent = prediction.data.title;
-                predictionElm.querySelector("button.startPrediction").dataset.predictionId = prediction.name;
-                predictionsList.appendChild(predictionElm);
+            const currentPredictionTemplate = document.getElementById("currentPredictionTemplate").content;
+            const currentPredictionOutcomeTemplate = document.getElementById("currentPredictionOutcomeTemplate").content;
+            socket.on("displayAllPredictions", function (serverData) {
+                const data = {};
+                data.predictions = serverData.predictions;
+                data.predictions.forEach(prediction => {
+                    let predictionElm = predictionElmInListTemplate.cloneNode(true);
+                    predictionElm.querySelector(".title").textContent = prediction.data.title;
+                    predictionElm.querySelector("button.startPrediction").dataset.predictionId = prediction.name;
+                    predictionsList.appendChild(predictionElm);
+                });
+                
+                // ANCHOR START PREDICTION
+                const startPredictionButtons = document.getElementsByClassName("startPrediction");
+                Array.from(startPredictionButtons).forEach((predictionButton) => {
+                    predictionButton.addEventListener('click', (e) => {
+                        let prediction = data.predictions.find(prediction => {
+                            return prediction.name === predictionButton.dataset.predictionId;
+                        });
+
+                        prediction.status = 'open';
+
+                        e.target.classList.add('used');
+
+                        adminSocket.emit('startPrediction', { prediction: prediction });
+                    });
+                });
             });
 
             // SECTION EVENTS
@@ -115,24 +137,6 @@
             socket.on("updateTwitch", function (data) {
                 twitchSpan.textContent = data.useTwitch ? 'Yes' : 'No';
             })
-
-            // ANCHOR START PREDICTION
-            const startPredictionButtons = document.getElementsByClassName("startPrediction");
-            const currentPredictionTemplate = document.getElementById("currentPredictionTemplate").content;
-            const currentPredictionOutcomeTemplate = document.getElementById("currentPredictionOutcomeTemplate").content;
-            Array.from(startPredictionButtons).forEach((predictionButton) => {
-                predictionButton.addEventListener('click', (e) => {
-                    let prediction = data.predictions.find(prediction => {
-                        return prediction.name === predictionButton.dataset.predictionId;
-                    });
-
-                    prediction.status = 'open';
-
-                    e.target.classList.add('used');
-
-                    adminSocket.emit('startPrediction', { prediction: prediction });
-                });
-            });
 
             // SECTION MANAGE CURRENT PREDICTIONS
             function displayCurrentPredictions(predictions) {
@@ -193,7 +197,7 @@
             }
             socket.on("displayCurrentPredictions", function (data) {
                 displayCurrentPredictions(data.currentPredictions);
-            })
+            });
 
             // !SECTION
             // !SECTION

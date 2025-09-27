@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 
 // Internal files
 const { TwitchAPI } = require('./src/services/TwitchAPI');
-const { MongoDBService } = require('./src/services/MongoDB');
+const { MongoDB } = require('./src/services/MongoDB');
 const { SocketManager } = require('./src/socket/SocketManager');
 const { MainSocketHandler } = require('./src/socket/MainSocketHandler');
 const { AdminSocketHandler } = require('./src/socket/AdminSocketHandler');
@@ -18,16 +18,6 @@ const { AdminSocketHandler } = require('./src/socket/AdminSocketHandler');
 const app = express();
 const server = createServer(app);
 const PORT = process.env.PORT || 3000;
-
-// ANCHOR Initialise services
-const mongoDBService = new MongoDBService();
-mongoDBService.connect().catch(console.error);
-const twitchAPI = new TwitchAPI();
-
-// ANCHOR Initialise Socket.IO handlers
-const socketManager = new SocketManager(server);
-const mainSocketHandler = new MainSocketHandler(socketManager);
-const adminSocketHandler = new AdminSocketHandler(socketManager, twitchAPI);
 
 //ANCHOR - Routes
 function authentication(req, res, next) {
@@ -67,8 +57,22 @@ app.get('/admin', authentication, (req, res) => {
     res.sendFile(join(__dirname, 'public/admin.html'));
 });
 
+// ANCHOR Initialise services and start server
+async function initialise() {
+    const mongoDB = new MongoDB();
+    await mongoDB.connect().catch(console.error);
+    const twitchAPI = new TwitchAPI();
+
+    // Initialize Socket.IO handlers
+    const socketManager = new SocketManager(server);
+    const mainSocketHandler = new MainSocketHandler(socketManager);
+    const adminSocketHandler = new AdminSocketHandler(socketManager, twitchAPI, mongoDB);
+
+    server.listen(PORT, () => {
+        console.log(`Server is running at http://localhost:${PORT}`);
+    });
+}
+
 //ANCHOR - START SERVER
 console.log('app started');
-server.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
-});
+initialise().catch(console.error);

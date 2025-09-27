@@ -41,6 +41,16 @@ class MongoDB {
             throw error;
         }
     }
+
+    async getAllPredictions() {
+        try {
+            const predictions = await this.db.collection('predictions').find({}).toArray();
+            return predictions;
+        } catch (error) {
+            console.error('Error fetching predictions:', error);
+            throw error;
+        }
+    }
 }
 
-module.exports = { MongoDBService: MongoDB };
+module.exports = { MongoDB };
