@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-//ANCHOR - Imports
+//ANCHOR Imports
 // External libraries
 const express = require('express');
 const { createServer } = require('node:http');
@@ -14,12 +14,12 @@ const { SocketManager } = require('./src/socket/SocketManager');
 const { MainSocketHandler } = require('./src/socket/MainSocketHandler');
 const { AdminSocketHandler } = require('./src/socket/AdminSocketHandler');
 
-// ANCHOR INITIALISING SERVER
+// ANCHOR Initialising server
 const app = express();
 const server = createServer(app);
 const PORT = process.env.PORT || 3000;
 
-//ANCHOR - Routes
+//ANCHOR Routes
 function authentication(req, res, next) {
     const authheader = req.headers.authorization;
 
@@ -35,7 +35,6 @@ function authentication(req, res, next) {
     const user = auth[0];
     const pass = auth[1];
 
-    // Mot de passe hashé
     const hashedPassword = '$2b$10$kTFjV9qUYcu6StsQC5z84eMtoxkBqMI0vU1fz5pBG5jGD87T6k69u';
 
     if (user == 'admin' && bcrypt.compareSync(pass, hashedPassword)) {
@@ -63,7 +62,7 @@ async function initialise() {
     await mongoDB.connect().catch(console.error);
     const twitchAPI = new TwitchAPI();
 
-    // Initialize Socket.IO handlers
+    // Initialise Socket.IO handlers
     const socketManager = new SocketManager(server);
     const mainSocketHandler = new MainSocketHandler(socketManager);
     const adminSocketHandler = new AdminSocketHandler(socketManager, twitchAPI, mongoDB);
@@ -73,6 +72,5 @@ async function initialise() {
     });
 }
 
-//ANCHOR - START SERVER
 console.log('app started');
 initialise().catch(console.error);

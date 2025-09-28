@@ -1,6 +1,7 @@
 const { Server } = require('socket.io');
 
 class SocketManager {
+    // ANCHOR Global variables shared across sockets
     constructor(server) {
         this.io = new Server(server);
         this.users = [];
@@ -14,6 +15,7 @@ class SocketManager {
         return this.io;
     }
 
+    // ANCHOR Calculate odds for a given prediction based on bets placed
     calculateOdds(prediction) {
         const outcomes = prediction.data.outcomes;
     
