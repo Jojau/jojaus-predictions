@@ -51,6 +51,20 @@ class MongoDB {
             throw error;
         }
     }
+
+    async addPredictionResult(predictionId, validatedOutcomeId) {
+        try {
+            const result = await this.db.collection('results').insertOne({
+                predictionId: predictionId,
+                outcomeId: validatedOutcomeId,
+                timestamp: new Date()
+            });
+            return result;
+        } catch (error) {
+            console.error('Error adding prediction result:', error);
+            throw error;
+        }
+    }
 }
 
 module.exports = { MongoDB };

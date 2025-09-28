@@ -133,6 +133,9 @@ class AdminSocketHandler {
         });
         predictionToValidate.status = 'validated';
         predictionToValidate.data.outcomes[Number(data.outcomeIndex)].validated = true;
+
+        // Save result in database
+        await this.mongoDB.addPredictionResult(predictionToValidate.name, Number(data.outcomeIndex));
         
         this.io.emit("predictionValidated", { 
             validatedPrediction: predictionToValidate, 
