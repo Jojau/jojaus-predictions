@@ -164,6 +164,7 @@ class MainSocketHandler {
                 }
             });
         });
+        this.io.local.emit("updateLeaderboard", { users: this.manager.users });
     }
 
     // ANCHOR Handle prediction validated (give points to winners)
