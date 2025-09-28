@@ -92,7 +92,7 @@ class MainSocketHandler {
     }
 
     getPoints(socket, user) {
-        user.points += 10;
+        user.points = Math.floor(user.points + 10);
         this.saveUser(socket, user);
         this.io.to(socket.id).emit('setPoints', { points: user.points });
     }
@@ -154,7 +154,7 @@ class MainSocketHandler {
         let validatedOutcome = data.validatedPrediction.data.outcomes[Number(data.validatedOutcomeIndex)];
         (validatedOutcome.betters || []).forEach(better => {
             if (better.user.userID === user.userID) {
-                user.points += Number(better.points) * Number(validatedOutcome.odds);
+                user.points = Math.floor(user.points + Number(better.points) * Number(validatedOutcome.odds));
                 this.saveUser(socket, user);
                 this.io.to(socket.id).emit('setPoints', { points: user.points });
             }
