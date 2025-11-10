@@ -309,6 +309,14 @@ input {
   max-height: 666px;
   overflow: auto;
 }
+#adminContainer #predictionsList #categoriesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+  margin-bottom: 48px;
+}
 #adminContainer #predictionsList .prediction {
   margin-bottom: 24px;
 }

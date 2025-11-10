@@ -35,8 +35,14 @@
         <div id="content">
             <!-- ANCHOR PREDICTIONS LIST -->
             <aside id="predictionsList">
-                <h2>All predictions</h2>
-            
+                <h2>Available categories</h2>
+                <div id="categoriesContainer">
+
+                </div>
+                <h2>Predictions</h2>
+                <div id="predictionsContainer">
+
+                </div>
             </aside>
             
             <!-- ANCHOR CURRENT PREDICTION -->
@@ -85,12 +91,29 @@
             const socket = io();
             const adminSocket = io("/admin");
 
+            // ANCHOR IMPORTING AND DISPLAYING ALL CATEGORIES
+            const categoriesContainer = document.getElementById("categoriesContainer");
+            socket.on("displayAllCategories", function (serverData) {
+                categoriesContainer.innerHTML = '';
+                const categoriesArray = serverData.categories;
+                categoriesArray.forEach(category => {
+                    let catButton = document.createElement("button");
+                    catButton.textContent = category;
+                    catButton.addEventListener('click', () => {
+                        adminSocket.emit('getPredictionsByCategory', { categoryName: category });
+                        console.log(category);
+                    });
+                    categoriesContainer.appendChild(catButton);
+                });
+            });
+
             // ANCHOR IMPORTING AND DISPLAYING ALL PREDICTIONS
-            const predictionsList = document.getElementById("predictionsList");
+            const predictionsList = document.getElementById("predictionsContainer");
             const predictionElmInListTemplate = document.getElementById("predictionElmInListTemplate").content;
             const currentPredictionTemplate = document.getElementById("currentPredictionTemplate").content;
             const currentPredictionOutcomeTemplate = document.getElementById("currentPredictionOutcomeTemplate").content;
             socket.on("displayAllPredictions", function (serverData) {
+                predictionsList.innerHTML = '';
                 const data = {};
                 data.predictions = serverData.predictions;
                 data.predictions.forEach(prediction => {

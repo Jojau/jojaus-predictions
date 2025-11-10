@@ -30,12 +30,12 @@ class AdminSocketHandler {
 
     // ANCHOR Emit initial state
     async emitInitialState(socket) {
-        // Send all predictions from database
+        // Send all categories from database
         try {
-            const predictions = await this.mongoDB.getAllPredictions();
-            this.io.local.emit("displayAllPredictions", { predictions: predictions });
+            const categories = await this.mongoDB.getAllCategories();
+            this.io.local.emit("displayAllCategories", { categories: categories });
         } catch (error) {
-            console.error('Error fetching predictions:', error);
+            console.error('Error fetching categories:', error);
         }
 
         // Send current predictions (in progress)
@@ -51,6 +51,7 @@ class AdminSocketHandler {
     setupEventListeners(socket) {
         socket.on("switchMode", (data) => this.handleSwitchMode());
         socket.on("switchTwitch", (data) => this.handleSwitchTwitch());
+        socket.on("getPredictionsByCategory", (data) => this.handleGetPredictionsByCategory(data));
         socket.on("startPrediction", (data) => this.handleStartPrediction(data));
         socket.on("setPredictionClosingSoon", (data) => this.handlePredictionClosingSoon(data));
         socket.on("closePrediction", (data) => this.handleClosePrediction(data));
@@ -77,6 +78,15 @@ class AdminSocketHandler {
         this.manager.useTwitch = !this.manager.useTwitch;
         console.log("Twitch " + (this.manager.useTwitch ? 'activated' : 'deactivated'));
         this.io.local.emit("updateTwitch", { useTwitch: this.manager.useTwitch });
+    }
+
+    async handleGetPredictionsByCategory(data) {
+        try {
+            const predictions = await this.mongoDB.getPredictionsByCategory(data.categoryName);
+            this.io.local.emit("displayAllPredictions", { predictions: predictions });
+        } catch (error) {
+            console.error('Error fetching predictions:', error);
+        }
     }
 
     // ANCHOR Start a new prediction
