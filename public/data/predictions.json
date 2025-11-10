@@ -2,6 +2,9 @@
   "predictions": [
     {
       "name": "Fish1",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 0}
+      ],
       "data": {
         "title": "Size of the 1st fish? (cm)",
         "outcomes": [
@@ -14,6 +17,9 @@
     },
     {
       "name": "Fish2",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 1}
+      ],
       "data": {
         "title": "Size of the 2nd fish? (cm)",
         "outcomes": [
@@ -26,6 +32,9 @@
     },
     {
       "name": "StoneRupee",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 2}
+      ],
       "data": {
         "title": "What's under the stone?",
         "outcomes": [
@@ -36,6 +45,9 @@
     },
     {
       "name": "Goats",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 3}
+      ],
       "data": {
         "title": "Hundredth of goats time?",
         "outcomes": [
@@ -46,6 +58,9 @@
     },
     {
       "name": "SewersMidnaText",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 4}
+      ],
       "data": {
         "title": "Skipping Midna text in the tower staircase?",
         "outcomes": [
@@ -56,6 +71,9 @@
     },
     {
       "name": "JamalRevives",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 5}
+      ],
       "data": {
         "title": "How many times will I have to revive Jamal?",
         "outcomes": [
@@ -68,6 +86,9 @@
     },
     {
       "name": "PostFaronTwilightBackflip",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 6}
+      ],
       "data": {
         "title": "Post Faron Twilight Backflip?",
         "outcomes": [
@@ -78,6 +99,9 @@
     },
     {
       "name": "OokHops",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 7}
+      ],
       "data": {
         "title": "Number of Ook hops?",
         "outcomes": [
@@ -90,6 +114,9 @@
     },
     {
       "name": "EldinVesselPostman",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 8}
+      ],
       "data": {
         "title": "The postman sings...",
         "outcomes": [
@@ -100,6 +127,9 @@
     },
     {
       "name": "LanayruGateSidehop",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 9}
+      ],
       "data": {
         "title": "Successful sidehop through Lanayru Gate?",
         "outcomes": [
@@ -112,6 +142,9 @@
     },
     {
       "name": "SteamWait",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 10}
+      ],
       "data": {
         "title": "Will I have to wait for the geyser to stop?",
         "outcomes": [
@@ -122,6 +155,9 @@
     },
     {
       "name": "RupeeFall",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 11}
+      ],
       "data": {
         "title": "Will I fall on the rupee?",
         "outcomes": [
@@ -132,6 +168,9 @@
     },
     {
       "name": "ZoraArmourPostman",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 12}
+      ],
       "data": {
         "title": "The postman sings...",
         "outcomes": [
@@ -142,6 +181,9 @@
     },
     {
       "name": "EscortRupees",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 13}
+      ],
       "data": {
         "title": "Number of rupees after the escort?",
         "outcomes": [
@@ -152,6 +194,9 @@
     },
     {
       "name": "IzaMessengerRevives",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 14}
+      ],
       "data": {
         "title": "Reviving twilit messenger in front of Iza?",
         "outcomes": [
@@ -162,6 +207,9 @@
     },
     {
       "name": "BoGrabs",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 15}
+      ],
       "data": {
         "title": "How many times will I get grabbed by Bo?",
         "outcomes": [
@@ -173,6 +221,9 @@
     },
     {
       "name": "GeleeJump",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 16}
+      ],
       "data": {
         "title": "Will the chu jump during the cutscene?",
         "outcomes": [
@@ -183,6 +234,9 @@
     },
     {
       "name": "MorpheelPillars",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 17}
+      ],
       "data": {
         "title": "Pillars destroyed by Morpheel during ending cutscene",
         "outcomes": [
@@ -196,6 +250,9 @@
     },
     {
       "name": "Yeto",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 18}
+      ],
       "data": {
         "title": "Yeto sings...",
         "outcomes": [
@@ -206,6 +263,9 @@
     },
     {
       "name": "BoostBombs",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 19}
+      ],
       "data": {
         "title": "Number of bombs after bomb boost?",
         "outcomes": [
@@ -216,6 +276,9 @@
     },
     {
       "name": "Poe4",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 20}
+      ],
       "data": {
         "title": "First poe to attack?",
         "outcomes": [
@@ -228,6 +291,9 @@
     },
     {
       "name": "DeathSwordSpin",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 21}
+      ],
       "data": {
         "title": "Death Sword flies...",
         "outcomes": [
@@ -238,6 +304,9 @@
     },
     {
       "name": "SouthWind",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 22}
+      ],
       "data": {
         "title": "Fighting against the wind? (south area)",
         "outcomes": [
@@ -248,6 +317,9 @@
     },
     {
       "name": "EastWind",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 23}
+      ],
       "data": {
         "title": "Fighting against the wind? (east area)",
         "outcomes": [
@@ -258,6 +330,9 @@
     },
     {
       "name": "WestWind",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 24}
+      ],
       "data": {
         "title": "Fighting against the wind? (west area)",
         "outcomes": [
@@ -268,6 +343,9 @@
     },
     {
       "name": "ArgorokSpin",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 25}
+      ],
       "data": {
         "title": "Argorok flies...",
         "outcomes": [
@@ -278,6 +356,9 @@
     },
     {
       "name": "EastZantHead",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 26}
+      ],
       "data": {
         "title": "Zant head spawn in east wing first room?",
         "outcomes": [
@@ -288,6 +369,9 @@
     },
     {
       "name": "WestZantHead",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 27}
+      ],
       "data": {
         "title": "Zant head spawn in west wing first room?",
         "outcomes": [
@@ -301,6 +385,9 @@
     },
     {
       "name": "OutsideZantHead",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 28}
+      ],
       "data": {
         "title": "Zant head spawn on the south platform outside",
         "outcomes": [
@@ -312,6 +399,9 @@
     },
     {
       "name": "ZantFairy",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 29}
+      ],
       "data": {
         "title": "The right pot of the boss door contains...",
         "outcomes": [
@@ -323,6 +413,9 @@
     },
     {
       "name": "HyruleCastlePostman",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 30}
+      ],
       "data": {
         "title": "The postman sings...",
         "outcomes": [
@@ -333,6 +426,9 @@
     },
     {
       "name": "AeralfosDrop",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 31}
+      ],
       "data": {
         "title": "Number of hearts dropped by the Aeralfos?",
         "outcomes": [
@@ -344,6 +440,9 @@
     },
     {
       "name": "ZeldaCycles",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 32}
+      ],
       "data": {
         "title": "Number of Zelda cycles?",
         "outcomes": [
