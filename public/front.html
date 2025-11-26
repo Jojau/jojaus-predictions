@@ -13,45 +13,69 @@
 <body>
     <!-- SECTION HTML -->
     <div class="container" id="mainContainer">
-        <h1>Jojau's predictions</h1>
 
-        <!-- ANCHOR USER INFO -->
-        <div id="userInfo">
-            <h2>Your profile</h2>
-            <div>
-                <div>
-                    <p><strong>Username</strong><br /><span id="username"></span></p>
-                    <p><strong>Points</strong><br /><span id="userPoints"></span></p>
+        <!-- ANCHOR HEADER -->
+        <header>
+            <h1>Jojau's predictions</h1>
+        </header>
+
+        <!-- ANCHOR TWITCH STREAM -->
+        <div id="twitchContainer">
+            <!-- Add a placeholder for the Twitch embed -->
+            <div id="twitch-embed"></div>
+        </div>
+
+        <div id="predictionsGameContainer">
+            <!-- ANCHOR CURRENT PREDICTIONS -->
+            <div id="predictions">
+                <h2>
+                    Current prediction(s)
+                </h2>
+                <p>Currently using: <span id="mode"></span></p>
+
+                <div id="predictionsContainer">
+
                 </div>
+            </div>
 
-                <div>
-                    <label for="inputUsername">Change your username</label>
-                    <div id="userForm">
-                        <input type="text" name="username" id="inputUsername">
-                        <button id="buttonUsername">OK</button>
+            <div id="users">
+                <!-- ANCHOR USER INFO -->
+                <div id="userInfo">
+                    <h2>Your profile</h2>
+                    <div>
+                        <div>
+                            <p><strong>Username</strong><br /><span id="username"></span></p>
+                            <p><strong>Points</strong><br /><span id="userPoints"></span></p>
+                        </div>
+
+                        <div>
+                            <label for="inputUsername">Change your username</label>
+                            <div id="userForm">
+                                <input type="text" name="username" id="inputUsername">
+                                <button id="buttonUsername">OK</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- ANCHOR Leaderboard -->
+                <div id="leaderboard">
+                    <h2>Leaderboard</h2>
+                    <ol id="leaderboardContainer">
+
+                    </ol>
+                </div>
             </div>
         </div>
-
-        <!-- ANCHOR CURRENT PREDICTIONS -->
-        <div id="predictions">
-            <h2>
-                Current prediction(s)
-            </h2>
-            <p>Currently using: <span id="mode"></span></p>
-
-            <div id="predictionsContainer">
-
+        
+        <div id="links">
+            <h2>External links</h2>
+            <div id="linksContainer">
+                <a href="https://jojau.notion.site/Jojau-s-predictions-explained-1b12361f8eb780608d20fb6a2baf0280?pvs=4"
+                    target="_blank" rel="noopener noreferrer">Predictions explained</a>
+                <a href="https://jojau.notion.site/About-Jojau-s-predictions-1b12361f8eb7807189e4e99d7faf3f70?pvs=4"
+                    target="_blank" rel="noopener noreferrer">About</a>
             </div>
-        </div>
-
-        <!-- ANCHOR Leaderboard -->
-        <div id="leaderboard">
-            <h2>Leaderboard</h2>
-            <ol id="leaderboardContainer">
-
-            </ol>
         </div>
 
         <div id="links">
@@ -90,10 +114,17 @@
         <div class="outcome">
             <h4 class="title">Outcome title</h4>
 
-            <div class="buttons">
-                <input type="button" value="10">
-                <input type="button" value="100">
-                <input type="button" value="1000">
+            <div>
+                <div class="buttons">
+                    <input type="button" value="10">
+                    <input type="button" value="100">
+                    <input type="button" value="1000">
+                </div>
+                
+                <form class="betContainer">
+                    <input type="number" name="customBet" min="0">
+                    <button type="submit" class="bet">Bet</button>
+                </form>
             </div>
 
             <p><strong>Odds</strong><br /><span class="odds"></span></p>
@@ -110,153 +141,171 @@
 
     <!-- SECTION SCRIPT -->
     <script>
-        window.addEventListener('load', () => {
-            const socket = new io();
+        const socket = new io();
 
-            // SECTION INITIALISATION
-            const sessionID = localStorage.getItem("sessionID");
-            if (sessionID) {
-                this.usernameAlreadySelected = true;
-                socket.auth = { sessionID };
-                socket.connect();
-            }
-            // ANCHOR - VARIABLES
-            var user = {
-                username: "defaultUsername",
-                points: 0
-            }
-            var inputUsername = document.getElementById("inputUsername");
-            var buttonUsername = document.getElementById("buttonUsername");
-            var spanUsername = document.getElementById("username");
-            var spanUserPoints = document.getElementById("userPoints");
-            const modeSpan = document.getElementById("mode");
-            const userInListTemplate = document.getElementById("userInList").content;
-            var leaderboardContainer = document.getElementById("leaderboardContainer");
-            const currentPredictionTemplate = document.getElementById("currentPrediction").content;
-            var predictionsContainer = document.getElementById("predictionsContainer");
-            const outcomeTemplate = document.getElementById("outcome").content;
+        // SECTION INITIALISATION
+        const sessionID = localStorage.getItem("sessionID");
+        if (sessionID) {
+            this.usernameAlreadySelected = true;
+            socket.auth = { sessionID };
+            socket.connect();
+        }
+        // ANCHOR - VARIABLES
+        var user = {
+            username: "defaultUsername",
+            points: 0
+        }
+        var inputUsername = document.getElementById("inputUsername");
+        var buttonUsername = document.getElementById("buttonUsername");
+        var spanUsername = document.getElementById("username");
+        var spanUserPoints = document.getElementById("userPoints");
+        const modeSpan = document.getElementById("mode");
+        const userInListTemplate = document.getElementById("userInList").content;
+        var leaderboardContainer = document.getElementById("leaderboardContainer");
+        const currentPredictionTemplate = document.getElementById("currentPrediction").content;
+        var predictionsContainer = document.getElementById("predictionsContainer");
+        const outcomeTemplate = document.getElementById("outcome").content;
 
-            // SECTION FUNCTIONS
-            // SECTION  Display predictions
-            function displayCurrentPredictions(currentPredictions, validatedPrediction = null, validatedOutcomeIndex = null) {
-                predictionsContainer.innerHTML = '';
-                currentPredictions.forEach((prediction) => {
-                    // ANCHOR DISPLAY PREDICTION
-                    let currentPredictionElm = currentPredictionTemplate.cloneNode(true);
-                    currentPredictionElm.querySelector('.currentPrediction').classList.add(prediction.status);
-                    currentPredictionElm.querySelector(".title").textContent = prediction.data.title;
-                    if (prediction.status == 'closing-soon') {
-                        currentPredictionElm.querySelector('.status').textContent = "Closing soon!"
-                        currentPredictionElm.querySelector('.status').setAttribute('title', 'Bets closing at next loading zone (or cutscene idk)');
-                    } else {
-                        currentPredictionElm.querySelector('.status').textContent = prediction.status;
-                    }
+        // SECTION FUNCTIONS
+        // SECTION  Display predictions
+        function displayCurrentPredictions(currentPredictions, validatedPrediction = null, validatedOutcomeIndex = null) {
+            predictionsContainer.innerHTML = '';
+            currentPredictions.forEach((prediction) => {
+                // ANCHOR DISPLAY PREDICTION
+                let currentPredictionElm = currentPredictionTemplate.cloneNode(true);
+                currentPredictionElm.querySelector('.currentPrediction').classList.add(prediction.status);
+                currentPredictionElm.querySelector(".title").textContent = prediction.data.title;
+                if (prediction.status == 'closing-soon') {
+                    currentPredictionElm.querySelector('.status').textContent = "Closing soon!"
+                    currentPredictionElm.querySelector('.status').setAttribute('title', 'Bets closing at next loading zone (or cutscene idk)');
+                } else {
+                    currentPredictionElm.querySelector('.status').textContent = prediction.status;
+                }
 
-                    let currentPredictionOutcomeContainer = currentPredictionElm.querySelector(".outcomes");
-                    prediction.data.outcomes.forEach((outcome, outcomeIndex) => {
-                        // ANCHOR DISPLAY OUTCOME
-                        let outcomeElement = outcomeTemplate.cloneNode(true);
+                let currentPredictionOutcomeContainer = currentPredictionElm.querySelector(".outcomes");
+                prediction.data.outcomes.forEach((outcome, outcomeIndex) => {
+                    // ANCHOR DISPLAY OUTCOME
+                    let outcomeElement = outcomeTemplate.cloneNode(true);
 
-                        if (outcome.validated) outcomeElement.querySelector('.outcome').classList.add('validated');
+                    if (outcome.validated) outcomeElement.querySelector('.outcome').classList.add('validated');
 
-                        outcomeElement.querySelector(".title").textContent = outcome.title;
-                        outcomeElement.querySelector(".totalPoints").textContent = outcome.totalPoints ?? 0;
-                        outcomeElement.querySelector(".odds").textContent = outcome.odds ?? 0;
+                    outcomeElement.querySelector(".title").textContent = outcome.title;
+                    outcomeElement.querySelector(".totalPoints").textContent = outcome.totalPoints ?? 0;
+                    outcomeElement.querySelector(".odds").textContent = outcome.odds ?? 0;
 
-                        // ANCHOR PLACE BET
-                        outcomeElement.querySelectorAll("input[type='button']").forEach((button) => {
-                            button.addEventListener("click", (e) => {
-                                socket.emit("placeBet", {
-                                    prediction: prediction,
-                                    outcomeId: outcomeIndex,
-                                    betValue: button.value,
-                                });
-                            });
+                    // ANCHOR PLACE BET
+                    let bet=0;
+                    let betInput = outcomeElement.querySelector("input[name='customBet']");
+                    outcomeElement.querySelector("form").addEventListener("submit", (e) => {
+                        e.preventDefault();
+                    })
+                    outcomeElement.querySelectorAll("input[type='button']").forEach((button) => {
+                        button.addEventListener("click", (e) => {
+                            bet+= +button.value;
+                            betInput.value = +bet;
                         });
-
-                        let sortedBetters = (outcome.betters ||= []).sort(({ points: a }, { points: b }) => b - a);
-                        sortedBetters.forEach((better) => {
-                            let newLine = userInListTemplate.cloneNode(true);
-                            newLine.querySelector(".username").textContent = better.user.username;
-                            newLine.querySelector(".points").textContent = better.points;
-                            outcomeElement.querySelector(".betters").appendChild(newLine);
+                    });
+                    outcomeElement.querySelector("button.bet").addEventListener("click", (e) => {
+                        socket.emit("placeBet", {
+                            prediction: prediction,
+                            outcomeId: outcomeIndex,
+                            betValue: bet,
                         });
-
-                        currentPredictionOutcomeContainer.appendChild(outcomeElement);
                     });
 
-                    predictionsContainer.appendChild(currentPredictionElm);
-                })
-                // !SECTION
-            }
-            // !SECTION
+                    // ANCHOR DISPLAY BETTERS
+                    let sortedBetters = (outcome.betters ||= []).sort(({ points: a }, { points: b }) => b - a);
+                    sortedBetters.forEach((better) => {
+                        let newLine = userInListTemplate.cloneNode(true);
+                        newLine.querySelector(".username").textContent = better.user.username;
+                        newLine.querySelector(".points").textContent = better.points;
+                        outcomeElement.querySelector(".betters").appendChild(newLine);
+                    });
 
-            // ANCHOR RESTORE SESSION
-            socket.on("session", ({ sessionID, userID }) => {
-                // attach the session ID to the next reconnection attempts
-                socket.auth = { sessionID };
-                // store it in the localStorage
-                localStorage.setItem("sessionID", sessionID);
-                // save the ID of the user
-                socket.userID = userID;
-            });
-
-            // ANCHOR - GET INITIAL USERNAME ON CONNECTION
-            socket.on('setUsername', function (data) {
-                user.username = data.username;
-                inputUsername.value = '';
-                inputUsername.placeholder = user.username;
-                spanUsername.textContent = user.username;
-            });
-            // ANCHOR - GET INITIAL POINTS ON CONNECTION
-            socket.on('setPoints', function (data) {
-                user.points = data.points;
-                spanUserPoints.textContent = user.points;
-            });
-            // ANCHOR - GET MODE (ODDS)
-            socket.on("updateMode", function (data) {
-                modeSpan.textContent = data.useFixedOdds ? 'Fixed odds' : 'Chat odds';
-                modeSpan.setAttribute('title', data.useFixedOdds ? 'Odds are determined by their probability in-game' : 'Odds are determined by the bets of the players');
-            })
-            // !SECTION
-
-            // SECTION EVENTS
-            // ANCHOR - USERNAME CHANGE
-            buttonUsername.addEventListener('click', function () {
-                socket.emit('changeUsername', { username: inputUsername.value });
-            })
-
-            // ANCHOR UPDATE LEADERBOARD
-            socket.on("updateLeaderboard", function (data) {
-                leaderboardContainer.innerHTML = '';
-                dataUsers = data.users.sort(({ points: a }, { points: b }) => b - a);
-                dataUsers.forEach(dataUser => {
-                    let newLine = userInListTemplate.cloneNode(true);
-                    newLine.querySelector(".username").textContent = dataUser.username;
-                    newLine.querySelector(".points").textContent = dataUser.points;
-                    leaderboardContainer.appendChild(newLine);
+                    currentPredictionOutcomeContainer.appendChild(outcomeElement);
                 });
+
+                predictionsContainer.appendChild(currentPredictionElm);
             })
-
-            // ANCHOR PREDICTION STARTED
-            socket.on("displayCurrentPredictions", function (data) {
-                displayCurrentPredictions(data.currentPredictions);
-            })
-
-            // ANCHOR PREDICTION CANCELLED
-            // TODO J'aimerais éviter cette ligne mais bon en attendant je veux avancer et passer à autre chose
-            // Bwoah j'peux aussi faire de l'affichage jsp
-            socket.on("predictionCancelled", (data) => {
-                socket.emit("predictionCancelled", { cancelledPrediction: data.cancelledPrediction });
-            });
-
-            // ANCHOR PREDICTION VALIDATED
-            socket.on("predictionValidated", (data) => {
-                socket.emit("predictionValidated", { validatedPrediction: data.validatedPrediction, validatedOutcomeIndex: data.validatedOutcomeIndex });
-            });
             // !SECTION
+        }
+        // !SECTION
 
-            
+        // ANCHOR RESTORE SESSION
+        socket.on("session", ({ sessionID, userID }) => {
+            // attach the session ID to the next reconnection attempts
+            socket.auth = { sessionID };
+            // store it in the localStorage
+            localStorage.setItem("sessionID", sessionID);
+            // save the ID of the user
+            socket.userID = userID;
+        });
+
+        // ANCHOR - GET INITIAL USERNAME ON CONNECTION
+        socket.on('setUsername', function (data) {
+            user.username = data.username;
+            inputUsername.value = '';
+            inputUsername.placeholder = user.username;
+            spanUsername.textContent = user.username;
+        });
+        // ANCHOR - GET INITIAL POINTS ON CONNECTION
+        socket.on('setPoints', function (data) {
+            user.points = data.points;
+            spanUserPoints.textContent = user.points;
+        });
+        // ANCHOR - GET MODE (ODDS)
+        socket.on("updateMode", function (data) {
+            modeSpan.textContent = data.useFixedOdds ? 'Fixed odds' : 'Chat odds';
+            modeSpan.setAttribute('title', data.useFixedOdds ? 'Odds are determined by their probability in-game' : 'Odds are determined by the bets of the players');
+        })
+        // !SECTION
+
+        // SECTION EVENTS
+        // ANCHOR - USERNAME CHANGE
+        buttonUsername.addEventListener('click', function () {
+            socket.emit('changeUsername', { username: inputUsername.value });
+        })
+
+        // ANCHOR UPDATE LEADERBOARD
+        socket.on("updateLeaderboard", function (data) {
+            leaderboardContainer.innerHTML = '';
+            dataUsers = data.users.sort(({ points: a }, { points: b }) => b - a);
+            dataUsers.forEach(dataUser => {
+                let newLine = userInListTemplate.cloneNode(true);
+                newLine.querySelector(".username").textContent = dataUser.username;
+                newLine.querySelector(".points").textContent = dataUser.points;
+                leaderboardContainer.appendChild(newLine);
+            });
+        })
+
+        // ANCHOR PREDICTION STARTED
+        socket.on("displayCurrentPredictions", function (data) {
+            displayCurrentPredictions(data.currentPredictions);
+        })
+
+        // ANCHOR PREDICTION CANCELLED
+        // TODO J'aimerais éviter cette ligne mais bon en attendant je veux avancer et passer à autre chose
+        // Bwoah j'peux aussi faire de l'affichage jsp
+        socket.on("predictionCancelled", (data) => {
+            socket.emit("predictionCancelled", { cancelledPrediction: data.cancelledPrediction });
+        });
+
+        // ANCHOR PREDICTION VALIDATED
+        socket.on("predictionValidated", (data) => {
+            socket.emit("predictionValidated", { validatedPrediction: data.validatedPrediction, validatedOutcomeIndex: data.validatedOutcomeIndex });
+        });
+        // !SECTION
+    </script>
+
+    <!-- Load the Twitch embed JavaScript file -->
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+    <!-- Create a Twitch.Embed object that will render within the "twitch-embed" element -->
+    <script type="text/javascript">
+        new Twitch.Embed("twitch-embed", {
+            width: '100%',
+            height: 640,
+            channel: "jojau",
+            theme: "dark"
         });
     </script>
     <!-- !SECTION -->

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="style/style.css">
-    <title>Admin panel | Jojau's prédictions</title>
+    <title>Admin panel | Jojau's predictions</title>
     <script src="/socket.io/socket.io.js"></script>
 </head>
 
@@ -14,18 +14,35 @@
     <!-- SECTION HTML -->
     <div id="adminContainer" class="container">
         <h1>Admin panel</h1>
-
-        <!-- ANCHOR SWITCH MODE -->
-        <div id="modeContainer">
-            <p><strong>Current mode</strong><br /><span id="mode"></span></p>
-            <button id="switchMode">Switch</button>
+        
+        <div>
+            <h2>Options</h2>
+            <div id="optionsContainer">
+                <!-- ANCHOR SWITCH MODE -->
+                <div class="option">
+                    <p><strong>Current mode</strong><br /><span id="mode"></span></p>
+                    <button id="switchMode">Switch</button>
+                </div>
+                
+                <!-- ANCHOR SWITCH TWITCH -->
+                <div class="option">
+                    <p><strong>Twitch activated:</strong><br /><span id="twitch"></span></p>
+                    <button id="switchTwitch">Switch</button>
+                </div>
+            </div>
         </div>
 
         <div id="content">
             <!-- ANCHOR PREDICTIONS LIST -->
             <aside id="predictionsList">
-                <h2>All predictions</h2>
-            
+                <h2>Available categories</h2>
+                <div id="categoriesContainer">
+
+                </div>
+                <h2>Predictions</h2>
+                <div id="predictionsContainer">
+
+                </div>
             </aside>
             
             <!-- ANCHOR CURRENT PREDICTION -->
@@ -68,20 +85,59 @@
     <!-- !SECTION -->
 
     <!-- SECTION SCRIPTS -->
-    <script src="/data/predictions.js"></script>
+    <!-- <script src="/data/predictions.js"></script> -->
     <script>
         window.addEventListener('load', () => {
             const socket = io();
             const adminSocket = io("/admin");
 
+            // ANCHOR IMPORTING AND DISPLAYING ALL CATEGORIES
+            const categoriesContainer = document.getElementById("categoriesContainer");
+            socket.on("displayAllCategories", function (serverData) {
+                categoriesContainer.innerHTML = '';
+                const categoriesArray = serverData.categories;
+                categoriesArray.forEach(category => {
+                    let catButton = document.createElement("button");
+                    catButton.textContent = category;
+                    catButton.addEventListener('click', () => {
+                        adminSocket.emit('getPredictionsByCategory', { categoryName: category });
+                        console.log(category);
+                    });
+                    categoriesContainer.appendChild(catButton);
+                });
+            });
+
             // ANCHOR IMPORTING AND DISPLAYING ALL PREDICTIONS
-            const predictionsList = document.getElementById("predictionsList");
+            const predictionsList = document.getElementById("predictionsContainer");
             const predictionElmInListTemplate = document.getElementById("predictionElmInListTemplate").content;
-            data.predictions.forEach(prediction => {
-                let predictionElm = predictionElmInListTemplate.cloneNode(true);
-                predictionElm.querySelector(".title").textContent = prediction.data.title;
-                predictionElm.querySelector("button.startPrediction").dataset.predictionId = prediction.name;
-                predictionsList.appendChild(predictionElm);
+            const currentPredictionTemplate = document.getElementById("currentPredictionTemplate").content;
+            const currentPredictionOutcomeTemplate = document.getElementById("currentPredictionOutcomeTemplate").content;
+            socket.on("displayAllPredictions", function (serverData) {
+                predictionsList.innerHTML = '';
+                const data = {};
+                data.predictions = serverData.predictions;
+                data.predictions.forEach(prediction => {
+                    let predictionElm = predictionElmInListTemplate.cloneNode(true);
+                    predictionElm.querySelector(".title").textContent = prediction.data.title;
+                    predictionElm.querySelector("button.startPrediction").dataset.predictionId = prediction.name;
+                    predictionsList.appendChild(predictionElm);
+                });
+                
+                // ANCHOR START PREDICTION
+                const startPredictionButtons = document.getElementsByClassName("startPrediction");
+                Array.from(startPredictionButtons).forEach((predictionButton) => {
+                    predictionButton.addEventListener('click', (e) => {
+                        let prediction = data.predictions.find(prediction => {
+                            return prediction.name === predictionButton.dataset.predictionId;
+                        });
+
+                        prediction.status = 'open';
+
+                        e.target.classList.add('used');
+
+                        adminSocket.emit('startPrediction', { prediction: prediction });
+                    });
+                });
             });
 
             // SECTION EVENTS
@@ -95,23 +151,15 @@
                 modeSpan.textContent = data.useFixedOdds ? 'Fixed odds' : 'Chat odds';
             })
 
-            // ANCHOR START PREDICTION
-            const startPredictionButtons = document.getElementsByClassName("startPrediction");
-            const currentPredictionTemplate = document.getElementById("currentPredictionTemplate").content;
-            const currentPredictionOutcomeTemplate = document.getElementById("currentPredictionOutcomeTemplate").content;
-            Array.from(startPredictionButtons).forEach((predictionButton) => {
-                predictionButton.addEventListener('click', (e) => {
-                    let prediction = data.predictions.find(prediction => {
-                        return prediction.name === predictionButton.dataset.predictionId;
-                    });
-
-                    prediction.status = 'open';
-
-                    e.target.classList.add('used');
-
-                    adminSocket.emit('startPrediction', { prediction: prediction });
-                });
-            });
+            // ANCHOR CHANGE TWITCH
+            const switchTwitchButton = document.getElementById("switchTwitch");
+            const twitchSpan = document.getElementById("twitch");
+            switchTwitchButton.addEventListener('click', () => {
+                adminSocket.emit('switchTwitch');
+            })
+            socket.on("updateTwitch", function (data) {
+                twitchSpan.textContent = data.useTwitch ? 'Yes' : 'No';
+            })
 
             // SECTION MANAGE CURRENT PREDICTIONS
             function displayCurrentPredictions(predictions) {
@@ -172,7 +220,7 @@
             }
             socket.on("displayCurrentPredictions", function (data) {
                 displayCurrentPredictions(data.currentPredictions);
-            })
+            });
 
             // !SECTION
             // !SECTION

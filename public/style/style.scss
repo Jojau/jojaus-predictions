@@ -29,6 +29,7 @@ $super-white : #FEFAE0;
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'Helvetica Now Display';
     src: local('Helvetica Now Display Reg Ita'), local('HelveticaNowDisplay-RegIta'),
@@ -37,6 +38,7 @@ $super-white : #FEFAE0;
     font-weight: normal;
     font-style: italic;
 }
+
 @font-face {
     font-family: 'Helvetica Now Display';
     src: local('Helvetica Now Display Bold'), local('HelveticaNowDisplay-Bold'),
@@ -45,6 +47,7 @@ $super-white : #FEFAE0;
     font-weight: bold;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'Helvetica Now Display';
     src: local('Helvetica Now Display Bold Ita'), local('HelveticaNowDisplay-BoldIta'),
@@ -66,7 +69,8 @@ body {
 }
 
 .container {
-    width: 80%;
+    width: 90%;
+    max-width: 1640px;
     margin: 48px auto;
 }
 
@@ -124,165 +128,211 @@ input {
     justify-content: center;
     row-gap: 48px;
 
-    #userInfo {
-        max-width: 100%;
-        margin: auto;
+    #predictionsGameContainer {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 48px;
 
-        &>div {
-            display: flex;
-            flex-direction: column;
-            row-gap: 16px;
-            padding: 24px 48px;
-            background: $dark;
+        #users {
+            width: 100%;
+            max-width: 340px;
 
-            &>div:nth-child(1) {
+            #userInfo {
+                max-width: 100%;
+                margin: 0 auto 48px;
+
+                &>div {
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 16px;
+                    padding: 24px 48px;
+                    background: $dark;
+
+                    &>div:nth-child(1) {
+                        display: flex;
+                        justify-content: center;
+                        column-gap: 16px;
+
+                        p {
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+
+                            &:nth-child(2) {
+                                flex-shrink: 0;
+                            }
+                        }
+                    }
+
+                    &>div:nth-child(2) {
+                        display: flex;
+                        flex-direction: column;
+
+                        #userForm {
+                            display: flex;
+                            column-gap: 8px;
+
+                            #inputUsername {
+                                flex: 1 1 100%;
+                            }
+                        }
+                    }
+                }
+            }
+
+            #leaderboardContainer {
+                margin: 0;
+                padding: 24px 48px;
+                background-color: $dark;
                 display: flex;
-                justify-content: center;
-                column-gap: 16px;
+                flex-direction: column;
+                row-gap: 8px;
+                list-style-position: inside;
 
-                p {
+                li .username {
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
-
-                    &:nth-child(2) {
-                        flex-shrink: 0;
-                    }
+                    display: inline-block;
+                    max-width: calc(100% - 100px); //TODO Voir si on peut pas éviter une valeur explicite ici
+                    vertical-align: bottom;
                 }
             }
+        }
 
-            &>div:nth-child(2) {
+        #predictions {
+            flex: 1;
+
+            h2 {
+                margin-bottom: 0;
+            }
+
+            >p {
+                text-align: center;
+                margin-bottom: 24px;
+            }
+
+            #predictionsContainer {
                 display: flex;
                 flex-direction: column;
+                row-gap: 24px;
 
-                #userForm {
-                    display: flex;
-                    column-gap: 8px;
-
-                    #inputUsername {
-                        flex: 1 1 100%;
-                    }
-                }
-            }
-        }
-    }
-
-    #predictions {
-
-        h2 {
-            margin-bottom: 0;
-        }
-
-        >p {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        #predictionsContainer {
-            display: flex;
-            flex-direction: column;
-            row-gap: 24px;
-
-            &:empty::after {
-                content: "No prediction at the moment :(";
-                text-align: center;
-            }
-
-            .currentPrediction {
-                position: relative;
-                padding: 24px;
-                background-color: $very-dark-grey;
-
-                &.open,
-                &.closing-soon {
-                    background-color: $dark;
-
-                    .status {
-                        background-color: $light-green;
-                    }
-
-                    .outcomes .outcome {
-                        background-color: $semi-dark-green;
-
-                        .buttons {
-                            display: flex;
-                            justify-content: center;
-                            column-gap: 8px;
-                        }
-                    }
-                }
-
-                &.closing-soon {
-                    .status {
-                        background-color: $yellow;
-                        color: $very-dark;
-                    }
-                }
-
-                &.closed {
-                    .status {
-                        background-color: $yellow;
-                        color: $very-dark;
-                    }
-                }
-
-                >.title {
-                    font-weight: 700;
+                &:empty::after {
+                    content: "No prediction at the moment :(";
                     text-align: center;
-                    margin-bottom: 16px;
                 }
 
-                .status {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
+                .currentPrediction {
+                    position: relative;
+                    padding: 24px;
+                    background-color: $very-dark-grey;
 
-                    background-color: $dark-grey;
+                    &.open,
+                    &.closing-soon {
+                        background-color: $dark;
 
-                    padding: 8px;
-
-                    &::first-letter {
-                        text-transform: capitalize;
-                    }
-                }
-
-                .outcomes {
-                    display: flex;
-                    justify-content: center;
-                    align-items: stretch;
-                    flex-wrap: wrap;
-                    gap: 16px;
-
-                    h5 {
-                        font-size: 16px;
-                    }
-
-                    .outcome {
-                        width: 100%;
-                        max-width: 250px;
-                        padding: 16px;
-                        display: flex;
-                        flex-direction: column;
-                        row-gap: 16px;
-                        background-color: $dark-grey;
-
-                        &.validated {
+                        .status {
                             background-color: $light-green;
                         }
 
-                        .buttons {
-                            display: none;
+                        .outcomes .outcome {
+                            background-color: $semi-dark-green;
+
+                            .buttons {
+                                display: flex;
+                                justify-content: center;
+                                column-gap: 8px;
+                            }
+
+                            .betContainer {
+                                display: flex;
+                            }
+                        }
+                    }
+
+                    &.closing-soon {
+                        .status {
+                            background-color: $yellow;
+                            color: $very-dark;
+                        }
+                    }
+
+                    &.closed {
+                        .status {
+                            background-color: $yellow;
+                            color: $very-dark;
+                        }
+                    }
+
+                    >.title {
+                        font-weight: 700;
+                        text-align: center;
+                        margin-bottom: 16px;
+                    }
+
+                    .status {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+
+                        background-color: $dark-grey;
+
+                        padding: 8px;
+
+                        &::first-letter {
+                            text-transform: capitalize;
+                        }
+                    }
+
+                    .outcomes {
+                        display: flex;
+                        justify-content: center;
+                        align-items: stretch;
+                        flex-wrap: wrap;
+                        gap: 16px;
+
+                        h5 {
+                            font-size: 16px;
                         }
 
-                        .betters {
-                            margin: 0;
+                        .outcome {
+                            width: 100%;
+                            max-width: 250px;
+                            padding: 16px;
                             display: flex;
                             flex-direction: column;
-                            row-gap: 4px;
-                            padding-left: 0;
-                            list-style-position: inside;
-                            max-height: 120px;
-                            overflow: auto;
+                            row-gap: 16px;
+                            background-color: $dark-grey;
+
+                            &.validated {
+                                background-color: $light-green;
+                            }
+
+                            .buttons {
+                                display: none;
+                            }
+
+                            .betContainer {
+                                margin-top: 8px;
+                                display: none; //flex
+                                column-gap: 8px;
+
+                                input[name="customBet"] {
+                                    flex: 1 1 100%;
+                                }
+                            }
+
+                            .betters {
+                                margin: 0;
+                                display: flex;
+                                flex-direction: column;
+                                row-gap: 4px;
+                                padding-left: 0;
+                                list-style-position: inside;
+                                max-height: 120px;
+                                overflow: auto;
+                            }
                         }
                     }
                 }
@@ -290,22 +340,22 @@ input {
         }
     }
 
-    #leaderboardContainer {
-        margin: 0;
-        padding: 24px 48px;
-        background-color: $dark;
-        display: flex;
-        flex-direction: column;
-        row-gap: 8px;
-        list-style-position: inside;
+    #links {
 
-        li .username {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: inline-block;
-            max-width: calc(100% - 100px); //TODO Voir si on peut pas éviter une valeur explicite ici
-            vertical-align: bottom;
+        #linksContainer {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            a {
+                color: $fluo-green;
+
+                &:visited {
+                    color: $light-green;
+                }
+            }
         }
     }
 
@@ -351,6 +401,12 @@ input {
     row-gap: 48px;
     font-size: large;
 
+    #optionsContainer {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+    }
+
     #content {
         display: flex;
         column-gap: 48px;
@@ -360,6 +416,14 @@ input {
         flex: 0 0 250px;
         max-height: 666px;
         overflow: auto;
+
+        #categoriesContainer {
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 8px;
+            column-gap: 8px;
+            margin-bottom: 48px;
+        }
 
         .prediction {
             margin-bottom: 24px;
