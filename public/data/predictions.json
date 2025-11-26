@@ -1,0 +1,457 @@
+{
+  "predictions": [
+    {
+      "name": "Fish1",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 0}
+      ],
+      "data": {
+        "title": "Size of the 1st fish? (cm)",
+        "outcomes": [
+          { "_id": 0, "title": "26" },
+          { "_id": 1, "title": "27" },
+          { "_id": 2, "title": "28" },
+          { "_id": 3, "title": "29" }
+        ]
+      }
+    },
+    {
+      "name": "Fish2",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 1}
+      ],
+      "data": {
+        "title": "Size of the 2nd fish? (cm)",
+        "outcomes": [
+          { "_id": 0, "title": "26" },
+          { "_id": 1, "title": "27" },
+          { "_id": 2, "title": "28" },
+          { "_id": 3, "title": "29" }
+        ]
+      }
+    },
+    {
+      "name": "StoneRupee",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 2}
+      ],
+      "data": {
+        "title": "What's under the stone?",
+        "outcomes": [
+          { "_id": 0, "title": "A green rupee", "fixedOdds": 1.25 },
+          { "_id": 1, "title": "Nothing", "fixedOdds": 5 }
+        ]
+      }
+    },
+    {
+      "name": "Goats",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 3}
+      ],
+      "data": {
+        "title": "Hundredth of goats time?",
+        "outcomes": [
+          { "_id": 0, "title": "Odd" },
+          { "_id": 1, "title": "Even" }
+        ]
+      }
+    },
+    {
+      "name": "SewersMidnaText",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 4}
+      ],
+      "data": {
+        "title": "Skipping Midna text in the tower staircase?",
+        "outcomes": [
+          { "_id": 0, "title": "Yes", "fixedOdds": 1.43 },
+          { "_id": 1, "title": "No", "fixedOdds": 3.33 }
+        ]
+      }
+    },
+    {
+      "name": "JamalRevives",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 5}
+      ],
+      "data": {
+        "title": "How many times will I have to revive Jamal?",
+        "outcomes": [
+          { "_id": 0, "title": "None 😎", "fixedOdds": 6.3 },
+          { "_id": 1, "title": "1x", "fixedOdds": 2.93 },
+          { "_id": 2, "title": "2x", "fixedOdds": 2.93 },
+          { "_id": 3, "title": "3x or more", "fixedOdds": 6.3 }
+        ]
+      }
+    },
+    {
+      "name": "PostFaronTwilightBackflip",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 6}
+      ],
+      "data": {
+        "title": "Post Faron Twilight Backflip?",
+        "outcomes": [
+          { "_id": 0, "title": "Yes", "fixedOdds": 4.35 },
+          { "_id": 1, "title": "No", "fixedOdds": 1.3 }
+        ]
+      }
+    },
+    {
+      "name": "OokHops",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 7}
+      ],
+      "data": {
+        "title": "Number of Ook hops?",
+        "outcomes": [
+          { "_id": 0, "title": "2", "fixedOdds": 3.33 },
+          { "_id": 1, "title": "3", "fixedOdds": 3.33 },
+          { "_id": 2, "title": "4", "fixedOdds": 3.33 },
+          { "_id": 3, "title": "5 or more", "fixedOdds": 10 }
+        ]
+      }
+    },
+    {
+      "name": "EldinVesselPostman",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 8}
+      ],
+      "data": {
+        "title": "The postman sings...",
+        "outcomes": [
+          { "_id": 0, "title": "Rupee Get (HmmHmmHmm!)" },
+          { "_id": 1, "title": "Small item get (tatadada!)" }
+        ]
+      }
+    },
+    {
+      "name": "LanayruGateSidehop",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 9}
+      ],
+      "data": {
+        "title": "Successful sidehop through Lanayru Gate?",
+        "outcomes": [
+          { "_id": 0, "title": "#1", "fixedOdds": 6.3 },
+          { "_id": 1, "title": "#2", "fixedOdds": 2.93 },
+          { "_id": 2, "title": "#3", "fixedOdds": 2.93 },
+          { "_id": 3, "title": "#4", "fixedOdds": 6.3 }
+        ]
+      }
+    },
+    {
+      "name": "SteamWait",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 10}
+      ],
+      "data": {
+        "title": "Will I have to wait for the geyser to stop?",
+        "outcomes": [
+          { "_id": 0, "title": "Yes" },
+          { "_id": 1, "title": "No" }
+        ]
+      }
+    },
+    {
+      "name": "RupeeFall",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 11}
+      ],
+      "data": {
+        "title": "Will I fall on the rupee?",
+        "outcomes": [
+          { "_id": 0, "title": "Yes", "fixedOdds": 1.5 },
+          { "_id": 1, "title": "No", "fixedOdds": 3 }
+        ]
+      }
+    },
+    {
+      "name": "ZoraArmourPostman",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 12}
+      ],
+      "data": {
+        "title": "The postman sings...",
+        "outcomes": [
+          { "_id": 0, "title": "Rupee Get (HmmHmmHmm!)" },
+          { "_id": 1, "title": "Item get (tadadada!)" }
+        ]
+      }
+    },
+    {
+      "name": "EscortRupees",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 13}
+      ],
+      "data": {
+        "title": "Number of rupees after the escort?",
+        "outcomes": [
+          { "_id": 0, "title": "Odd" },
+          { "_id": 1, "title": "Even" }
+        ]
+      }
+    },
+    {
+      "name": "IzaMessengerRevives",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 14}
+      ],
+      "data": {
+        "title": "Reviving twilit messenger in front of Iza?",
+        "outcomes": [
+          { "_id": 0, "title": "No", "fixedOdds": 1.67 },
+          { "_id": 1, "title": "Yes", "fixedOdds": 2.5 }
+        ]
+      }
+    },
+    {
+      "name": "BoGrabs",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 15}
+      ],
+      "data": {
+        "title": "How many times will I get grabbed by Bo?",
+        "outcomes": [
+          { "_id": 0, "title": "0x 😍", "fixedOdds": 4 },
+          { "_id": 1, "title": "1x -> 4x", "fixedOdds": 2 },
+          { "_id": 2, "title": "5x or more 😭", "fixedOdds": 4 }
+        ]
+      }
+    },
+    {
+      "name": "GeleeJump",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 16}
+      ],
+      "data": {
+        "title": "Will the chu jump during the cutscene?",
+        "outcomes": [
+          { "_id": 0, "title": "Yes" },
+          { "_id": 1, "title": "No" }
+        ]
+      }
+    },
+    {
+      "name": "MorpheelPillars",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 17}
+      ],
+      "data": {
+        "title": "Pillars destroyed by Morpheel during ending cutscene",
+        "outcomes": [
+          { "_id": 0, "title": "0" },
+          { "_id": 1, "title": "1" },
+          { "_id": 2, "title": "2" },
+          { "_id": 3, "title": "3" },
+          { "_id": 4, "title": "4 or more" }
+        ]
+      }
+    },
+    {
+      "name": "Yeto",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 18}
+      ],
+      "data": {
+        "title": "Yeto sings...",
+        "outcomes": [
+          { "_id": 0, "title": "huh HUH huh!" },
+          { "_id": 1, "title": "HUH huh hu-huh!" }
+        ]
+      }
+    },
+    {
+      "name": "BoostBombs",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 19}
+      ],
+      "data": {
+        "title": "Number of bombs after bomb boost?",
+        "outcomes": [
+          { "_id": 0, "title": "Odd" },
+          { "_id": 1, "title": "Even" }
+        ]
+      }
+    },
+    {
+      "name": "Poe4",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 20}
+      ],
+      "data": {
+        "title": "First poe to attack?",
+        "outcomes": [
+          { "_id": 0, "title": "North" },
+          { "_id": 1, "title": "East" },
+          { "_id": 2, "title": "South" },
+          { "_id": 3, "title": "West" }
+        ]
+      }
+    },
+    {
+      "name": "DeathSwordSpin",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 21}
+      ],
+      "data": {
+        "title": "Death Sword flies...",
+        "outcomes": [
+          { "_id": 0, "title": "Clockwise" },
+          { "_id": 1, "title": "Anti-clockwise" }
+        ]
+      }
+    },
+    {
+      "name": "SouthWind",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 22}
+      ],
+      "data": {
+        "title": "Fighting against the wind? (south area)",
+        "outcomes": [
+          { "_id": 0, "title": "Yes" },
+          { "_id": 1, "title": "No" }
+        ]
+      }
+    },
+    {
+      "name": "EastWind",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 23}
+      ],
+      "data": {
+        "title": "Fighting against the wind? (east area)",
+        "outcomes": [
+          { "_id": 0, "title": "Yes", "fixedOdds": 1.33 },
+          { "_id": 1, "title": "No", "fixedOdds": 4 }
+        ]
+      }
+    },
+    {
+      "name": "WestWind",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 24}
+      ],
+      "data": {
+        "title": "Fighting against the wind? (west area)",
+        "outcomes": [
+          { "_id": 0, "title": "Yes" },
+          { "_id": 1, "title": "No" }
+        ]
+      }
+    },
+    {
+      "name": "ArgorokSpin",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 25}
+      ],
+      "data": {
+        "title": "Argorok flies...",
+        "outcomes": [
+          { "_id": 0, "title": "Clockwise (left)" },
+          { "_id": 1, "title": "Anti-clockwise (right)" }
+        ]
+      }
+    },
+    {
+      "name": "EastZantHead",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 26}
+      ],
+      "data": {
+        "title": "Zant head spawn in east wing first room?",
+        "outcomes": [
+          { "_id": 0, "title": "Left" },
+          { "_id": 1, "title": "Right" }
+        ]
+      }
+    },
+    {
+      "name": "WestZantHead",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 27}
+      ],
+      "data": {
+        "title": "Zant head spawn in west wing first room?",
+        "outcomes": [
+          { "_id": 0, "title": "1st platform (closest)" },
+          { "_id": 1, "title": "3rd platform" },
+          { "_id": 2, "title": "Left" },
+          { "_id": 3, "title": "Center" },
+          { "_id": 4, "title": "Right" }
+        ]
+      }
+    },
+    {
+      "name": "OutsideZantHead",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 28}
+      ],
+      "data": {
+        "title": "Zant head spawn on the south platform outside",
+        "outcomes": [
+          { "_id": 0, "title": "Left" },
+          { "_id": 1, "title": "Right" },
+          { "_id": 2, "title": "Center" }
+        ]
+      }
+    },
+    {
+      "name": "ZantFairy",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 29}
+      ],
+      "data": {
+        "title": "The right pot of the boss door contains...",
+        "outcomes": [
+          { "_id": 0, "title": "Nothing", "fixedOdds": 2.5 },
+          { "_id": 1, "title": "A red rupee", "fixedOdds": 2.5 },
+          { "_id": 2, "title": "A fairy", "fixedOdds": 5 }
+        ]
+      }
+    },
+    {
+      "name": "HyruleCastlePostman",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 30}
+      ],
+      "data": {
+        "title": "The postman sings...",
+        "outcomes": [
+          { "_id": 0, "title": "Rupee Get (HmmHmmHmm!)" },
+          { "_id": 1, "title": "Item get (tadadada!)" }
+        ]
+      }
+    },
+    {
+      "name": "AeralfosDrop",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 31}
+      ],
+      "data": {
+        "title": "Number of hearts dropped by the Aeralfos?",
+        "outcomes": [
+          { "_id": 0, "title": "0" },
+          { "_id": 1, "title": "1" },
+          { "_id": 2, "title": "3" }
+        ]
+      }
+    },
+    {
+      "name": "ZeldaCycles",
+      "categories": [
+        {"name": "Any% (Beginner)", "index": 32}
+      ],
+      "data": {
+        "title": "Number of Zelda cycles?",
+        "outcomes": [
+          { "_id": 0, "title": "7" },
+          { "_id": 1, "title": "8" },
+          { "_id": 2, "title": "9" },
+          { "_id": 3, "title": "Two-digits" }
+        ]
+      }
+    }
+  ]
+}
