@@ -359,6 +359,25 @@ input {
         }
     }
 
+    #links{
+
+        #linksContainer {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            a {
+                color: $fluo-green;
+
+                &:visited{
+                    color: $light-green;
+                }
+            }
+        }
+    }
+
     footer {
         display: flex;
         align-items: center;

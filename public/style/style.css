@@ -276,6 +276,19 @@ input {
 #mainContainer #links #linksContainer a:visited {
   color: #058C42;
 }
+#mainContainer #links #linksContainer {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+#mainContainer #links #linksContainer a {
+  color: #16DB65;
+}
+#mainContainer #links #linksContainer a:visited {
+  color: #058C42;
+}
 #mainContainer footer {
   display: flex;
   align-items: center;
