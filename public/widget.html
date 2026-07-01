@@ -160,6 +160,7 @@
         }
 
         .outcome h3 {
+            font-weight: normal;
             font-size: 18px;
             margin: 0;
         }
@@ -168,6 +169,19 @@
             font-size: 16px;
             color: rgba(245, 245, 220, 0.7059);
             margin: 8px 0 0 0;
+        }
+        
+        .outcome.validated {
+            background-color: #058C42;
+        }
+        .outcome.validated h3{
+            font-weight: bold;
+        }
+        .outcome.validated p{
+            color: #fafee0;
+        }
+        .outcome.validated::after {
+            background-color: #fff2;
         }
 
         /* ANCHOR LEADERBOARD */
@@ -219,7 +233,7 @@
         <h1>Predictions Leaderboard</h1>
         <div id="leaderboardContainer">
             <ol id="users">
-                
+
             </ol>
         </div>
     </template>
@@ -248,6 +262,8 @@
 
                 prediction.data.outcomes.forEach(outcome => {
                     const outcomeElement = outcomeTemplate.cloneNode(true).querySelector(".outcome");
+
+                    if (outcome.validated) outcomeElement.classList.add('validated');
 
                     const barHeight = totalPoints > 0 ? (outcome.totalPoints / totalPoints) * 80 : 0;
 
