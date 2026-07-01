@@ -52,6 +52,12 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
     res.sendFile(join(__dirname, 'public/front.html'));
 });
+app.get('/widget', (req, res) => {
+    res.sendFile(join(__dirname, 'public/widget.html'));
+});
+app.get('/alerts', (req, res) => {
+    res.sendFile(join(__dirname, 'public/alerts.html'));
+});
 app.get('/admin', authentication, (req, res) => {
     res.sendFile(join(__dirname, 'public/admin.html'));
 });

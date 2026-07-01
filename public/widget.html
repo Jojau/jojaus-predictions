@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jojau's prediction widget</title>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <style>
+        /* ANCHOR GENERAL */
+        @font-face {
+            font-family: 'Helvetica Now Display';
+            src: local('Helvetica Now Display Regular'), local('HelveticaNowDisplay-Regular'),
+                url('/assets/fonts/HelveticaNowDisplay-Regular.woff2') format('woff2'),
+                url('/assets/fonts/HelveticaNowDisplay-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Helvetica Now Display';
+            src: local('Helvetica Now Display Reg Ita'), local('HelveticaNowDisplay-RegIta'),
+                url('/assets/fonts/HelveticaNowDisplay-RegIta.woff2') format('woff2'),
+                url('/assets/fonts/HelveticaNowDisplay-RegIta.woff') format('woff');
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        @font-face {
+            font-family: 'Helvetica Now Display';
+            src: local('Helvetica Now Display Bold'), local('HelveticaNowDisplay-Bold'),
+                url('/assets/fonts/HelveticaNowDisplay-Bold.woff2') format('woff2'),
+                url('/assets/fonts/HelveticaNowDisplay-Bold.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Helvetica Now Display';
+            src: local('Helvetica Now Display Bold Ita'), local('HelveticaNowDisplay-BoldIta'),
+                url('/assets/fonts/HelveticaNowDisplay-BoldIta.woff2') format('woff2'),
+                url('/assets/fonts/HelveticaNowDisplay-BoldIta.woff') format('woff');
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 1030px;
+            height: 142px;
+            font-family: "Helvetica Now Display";
+            color: #FEFAE0;
+        }
+
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #020202;
+            overflow: hidden;
+        }
+
+        div[id$="Screen"] {
+            width: 100%;
+            height: 100%;
+            padding: 0 32px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* ANCHOR SLIDESHOW */
+        #slideshow {
+            position: relative;
+            /* overflow: hidden; */
+        }
+
+        .slide {
+            position: absolute;
+            width: 1030px;
+            height: 142px;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            z-index: 0;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+
+        /* SECTION INDIVIDUAL SLIDES */
+        /* ANCHOR PREDICTIONS */
+        #predictionScreen {
+            background: #020202;
+        }
+
+        #prediction {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #prediction h1 {
+            display: block;
+            width: 184px;
+            flex-shrink: 0;
+        }
+
+        #outcomesContainer,
+        #leaderboardContainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 16px;
+            height: 100%;
+            min-width: 782px;
+        }
+
+        #predictionContainer h2 {
+            font-size: 22px;
+            text-align: center;
+            margin: 16px;
+        }
+
+        .outcome {
+            height: 80px;
+            padding: 8px 16px;
+            flex: 1 0 143px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 0;
+            background-color: #1d2922;
+
+            transition: height 0.3s ease;
+        }
+
+        .outcome::after {
+            display: block;
+            height: var(--bar-height, 0px);
+            width: 100%;
+            content: "";
+            background-color: #395144;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .outcome h3 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .outcome p {
+            font-size: 16px;
+            color: rgba(245, 245, 220, 0.7059);
+            margin: 8px 0 0 0;
+        }
+
+        /* !SECTION */
+    </style>
+</head>
+
+<body>
+    <div id="predictionScreen">
+        <div id="prediction">
+            <!-- Si prédiction en cours, afficher le nom de la prédiction, les options et les points misés sur chaque option -->
+
+
+
+            <!-- Sinon afficher le leaderboard -->
+
+        </div>
+    </div>
+
+    <!-- ANCHOR TEMPLATES -->
+    <template id="currentPredictionTemplate">
+        <h1>Current Prediction</h1>
+
+        <div id="predictionContainer">
+            <h2 id="predictionTitle">Prediction title</h2>
+            <div id="outcomesContainer">
+
+            </div>
+        </div>
+    </template>
+    <template id="outcomeTemplate">
+        <div class="outcome">
+            <h3>Outcome title</h3>
+            <p>0pts</p>
+        </div>
+    </template>
+
+    <template id="leaderboardTemplate">
+        <h1>Predictions Leaderboard</h1>
+        <div id="leaderboardContainer">
+            <ol id="users">
+                <li class="user">
+                    Username (0pts)
+                </li>
+            </ol>
+        </div>
+    </template>
+
+    <script>
+        const socket = io();
+        socket.emit('changeUsername', { username: 'widget' });
+
+        const currentPredictionTemplate = document.getElementById("currentPredictionTemplate").content;
+        const outcomeTemplate = document.getElementById("outcomeTemplate").content;
+        const leaderboardTemplate = document.getElementById("leaderboardTemplate").content;
+
+        socket.on("displayCurrentPredictions", function (data) {
+            console.log(data.currentPredictions);
+
+            document.getElementById("prediction").innerHTML = "";
+
+            // If data.currentPredictions is not empty, display the first prediction
+            if (data.currentPredictions.length > 0) {
+                const prediction = data.currentPredictions[0];
+                const predictionElement = currentPredictionTemplate.cloneNode(true);
+
+                predictionElement.getElementById("predictionTitle").innerText = prediction.data.title;
+
+                const totalPoints = prediction.data.outcomes.reduce((sum, outcome) => sum + (outcome.totalPoints || 0), 0);
+
+                prediction.data.outcomes.forEach(outcome => {
+                    const outcomeElement = outcomeTemplate.cloneNode(true).querySelector(".outcome");
+
+                    const barHeight = totalPoints > 0 ? (outcome.totalPoints / totalPoints) * 80 : 0;
+
+                    outcomeElement.style.setProperty("--bar-height", `${barHeight}px`);
+                    outcomeElement.querySelector("h3").innerText = outcome.title;
+                    outcomeElement.querySelector("p").innerText = `${outcome.totalPoints}pts`;
+                    predictionElement.getElementById("outcomesContainer").appendChild(outcomeElement);
+                });
+
+                document.getElementById("prediction").appendChild(predictionElement);
+            }
+        })
+    </script>
+</body>
+
+</html>

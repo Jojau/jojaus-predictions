@@ -90,6 +90,7 @@
         window.addEventListener('load', () => {
             const socket = io();
             const adminSocket = io("/admin");
+            socket.emit('changeUsername', { username: 'admin' });
 
             // ANCHOR IMPORTING AND DISPLAYING ALL CATEGORIES
             const categoriesContainer = document.getElementById("categoriesContainer");
