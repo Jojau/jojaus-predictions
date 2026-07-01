@@ -103,6 +103,7 @@ class MainSocketHandler {
         socket.on("placeBet", (data) => this.handlePlaceBet(socket, user, data));
         socket.on("predictionCancelled", (data) => this.handlePredictionCancelled(socket, user, data));
         socket.on("predictionValidated", (data) => this.handlePredictionValidated(socket, user, data));
+        socket.on("getUsers", () => this.sendUsers(socket));
         socket.on("disconnect", () => this.handleDisconnect(user));
     }
 
@@ -178,6 +179,11 @@ class MainSocketHandler {
             }
         });
         this.io.local.emit("updateLeaderboard", { users: this.manager.users });
+    }
+
+    // ANCHOR Send users
+    sendUsers(socket) {
+        this.io.to(socket.id).emit("sendUsers", { users: this.manager.users });
     }
     // !SECTION
 
