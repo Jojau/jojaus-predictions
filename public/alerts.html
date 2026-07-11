@@ -1,1 +1,102 @@
-// Coller le code de mes alertes twitch et le modifier pour annoncer une nouvelle prédiction
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictions alerts</title>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <style>
+        html{
+            background-color: transparent;
+            overflow: hidden;
+        }
+        h1, p {
+            margin: 0;
+        }
+        h1{
+            font-size: 24px;
+        }
+        p {
+            font-size: 16px;
+            color: rgba(245, 245, 220, 0.7059);
+        }
+
+        #newPredictionAlert {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #020202;
+            color: #FEFAE0;
+            font-family: "Helvetica Now Display";
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+            padding: 16px;
+            box-sizing: border-box;
+            transform: translateX(100%);
+            pointer-events: none;
+            animation-fill-mode: forwards;
+        }
+
+        #newPredictionAlert.show {
+            animation: slideIn 0.7s ease-in-out forwards;
+        }
+
+        #newPredictionAlert.hide {
+            animation: slideOut 0.7s ease-in-out forwards;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOut {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="newPredictionAlert">
+        <h1>A new prediction started!</h1>
+        <p>Prediction title (option 1 / option 2 / option 3)</p>
+    </div>
+
+    <script>
+        const socket = io();
+
+        async function delay(s) {
+            return new Promise(resolve => setTimeout(resolve, s * 1000));
+        }
+
+        socket.on('newPredictionStarted', async (data) => {
+            const alertDiv = document.getElementById('newPredictionAlert');
+            alertDiv.querySelector('p').textContent = data.prediction.data.title + 
+                " (" + data.prediction.data.outcomes.map(item => item.title).join(' / ') + ")";
+
+            alertDiv.classList.remove('hide');
+            alertDiv.classList.add('show');
+
+            await delay(10);
+
+            alertDiv.classList.remove('show');
+            alertDiv.classList.add('hide');
+        });
+    </script>
+</body>
+</html>

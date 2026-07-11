@@ -96,6 +96,7 @@ class AdminSocketHandler {
         this.manager.currentPredictions.push(data.prediction);
         this.io.local.emit("displayCurrentPredictions", { currentPredictions: this.manager.currentPredictions });
         
+        this.io.local.emit("newPredictionStarted", { prediction: data.prediction });
         if(this.manager.useTwitch) {
             this.twitchAPI.sendAnnouncement(
                 "A new prediction started! " + 
