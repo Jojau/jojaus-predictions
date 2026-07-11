@@ -8,6 +8,7 @@
     <script src="/socket.io/socket.io.js"></script>
 
     <style>
+        /* SECTION STYLE */
         /* ANCHOR GENERAL */
         @font-face {
             font-family: 'Helvetica Now Display';
@@ -201,6 +202,7 @@
         }
 
         /* !SECTION */
+        /* !SECTION */
     </style>
 </head>
 
@@ -239,6 +241,7 @@
     </template>
 
     <script>
+        // SECTION SCRIPT
         const socket = io();
         socket.emit('changeUsername', { username: 'widget' });
 
@@ -246,6 +249,7 @@
         const outcomeTemplate = document.getElementById("outcomeTemplate").content;
         const leaderboardTemplate = document.getElementById("leaderboardTemplate").content;
 
+        // ANCHOR DISPLAY PREDICTIONS
         socket.on("displayCurrentPredictions", function (data) {
             console.log(data.currentPredictions);
 
@@ -280,6 +284,7 @@
             }
         })
 
+        // ANCHOR DISPLAY LEADERBOARD
         // When receiving the users list, display the leaderboard
         socket.on("sendUsers", function (data) {
             console.log(data.users);
@@ -300,6 +305,7 @@
 
             document.getElementById("prediction").appendChild(leaderboardElement);
         });
+        // !SECTION
     </script>
 </body>
 
