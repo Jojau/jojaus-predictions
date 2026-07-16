@@ -191,22 +191,20 @@
                     outcomeElement.querySelector(".odds").textContent = outcome.odds ?? 0;
 
                     // ANCHOR PLACE BET
-                    let bet=0;
                     let betInput = outcomeElement.querySelector("input[name='customBet']");
                     outcomeElement.querySelector("form").addEventListener("submit", (e) => {
                         e.preventDefault();
                     })
                     outcomeElement.querySelectorAll("input[type='button']").forEach((button) => {
                         button.addEventListener("click", (e) => {
-                            bet+= +button.value;
-                            betInput.value = +bet;
+                            betInput.value = String(Number(betInput.value) + Number(button.value));
                         });
                     });
                     outcomeElement.querySelector("button.bet").addEventListener("click", (e) => {
                         socket.emit("placeBet", {
                             prediction: prediction,
                             outcomeId: outcomeIndex,
-                            betValue: bet,
+                            betValue: +betInput.value,
                         });
                     });
 
