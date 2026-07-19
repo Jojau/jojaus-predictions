@@ -391,6 +391,22 @@ input {
     }
 }
 
+#goToPrediction,
+#goToStream {
+    display: none;
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 20;
+}
+
+@media (max-width: 768px) {
+    #goToPrediction.is-visible,
+    #goToStream.is-visible {
+        display: block;
+    }
+}
+
 // !SECTION
 
 // SECTION ADMIN INTERFACE

@@ -83,6 +83,9 @@
         </footer>
     </div>
 
+    <button id="goToPrediction">Go to predictions</button>
+    <button id="goToStream">Go to stream</button>
+
     <!-- SECTION TEMPLATES -->
     <!-- ANCHOR USER IN LIST -->
     <template id="userInList">
@@ -119,7 +122,7 @@
 
             <p><strong>Odds</strong><br /><span class="odds"></span></p>
             <div>
-                <p><strong>Total in play</strong><br /><span class="totalPoints">0</span></p>
+                <p><strong>Total in play</strong><br /><span class="totalPoints">0</span>pts</p>
                 <p><strong>Betters</strong></p>
                 <ol class="betters">
                 </ol>
@@ -155,8 +158,43 @@
         const currentPredictionTemplate = document.getElementById("currentPrediction").content;
         var predictionsContainer = document.getElementById("predictionsContainer");
         const outcomeTemplate = document.getElementById("outcome").content;
+        const goToPredictionButton = document.getElementById("goToPrediction");
+        const goToStreamButton = document.getElementById("goToStream");
+        const streamSection = document.getElementById("twitchContainer");
+        const predictionsSection = document.getElementById("predictionsGameContainer");
 
         // SECTION FUNCTIONS
+        function updateGoToButtons() {
+            const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+            if (!isMobile) {
+                goToPredictionButton.classList.remove("is-visible");
+                goToStreamButton.classList.remove("is-visible");
+                return;
+            }
+
+            const scrollPosition = window.scrollY + (window.innerHeight / 2);
+            const predictionsTop = predictionsSection.offsetTop;
+            const showPredictionButton = scrollPosition < predictionsTop;
+
+            goToPredictionButton.classList.toggle("is-visible", showPredictionButton);
+            goToStreamButton.classList.toggle("is-visible", !showPredictionButton);
+        }
+
+        goToPredictionButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            predictionsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+        goToStreamButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            streamSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+        window.addEventListener("scroll", updateGoToButtons, { passive: true });
+        window.addEventListener("resize", updateGoToButtons);
+        updateGoToButtons();
+
         // SECTION  Display predictions
         function displayCurrentPredictions(currentPredictions, validatedPrediction = null, validatedOutcomeIndex = null) {
             predictionsContainer.innerHTML = '';
