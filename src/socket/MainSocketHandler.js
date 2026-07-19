@@ -12,6 +12,11 @@ class MainSocketHandler {
         this.initializeConnection();
     }
 
+    // ANCHOR FUNCTIONS
+    filteredUsers() {
+        return this.manager.users.filter(u => !["widget", "admin", "alerts", "server"].includes(u.username));
+    }
+
     // SECTION User functions
     // ANCHOR Save user session
     saveUser(socket, user) {
@@ -93,7 +98,7 @@ class MainSocketHandler {
         this.io.to(socket.id).emit('setPoints', { points: user.points });
         this.io.to(socket.id).emit("updateMode", { useFixedOdds: this.manager.useFixedOdds });
         this.io.to(socket.id).emit("displayCurrentPredictions", { currentPredictions: this.manager.currentPredictions });
-        this.io.to(socket.id).emit("updateLeaderboard", { users: this.manager.users });
+        this.io.to(socket.id).emit("updateLeaderboard", { users: this.filteredUsers() });
     }
 
     // SECTION Events
@@ -112,7 +117,7 @@ class MainSocketHandler {
         user.username = data.username;
         this.saveUser(socket, user);
         this.io.to(socket.id).emit("setUsername", { username: user.username });
-        this.io.local.emit("updateLeaderboard", { users: this.manager.users });
+        this.io.local.emit("updateLeaderboard", { users: this.filteredUsers() });
         this.io.local.emit("displayCurrentPredictions", { currentPredictions: this.manager.currentPredictions });
     }
 
@@ -165,7 +170,7 @@ class MainSocketHandler {
                 }
             });
         });
-        this.io.local.emit("updateLeaderboard", { users: this.manager.users });
+        this.io.local.emit("updateLeaderboard", { users: this.filteredUsers() });
     }
 
     // ANCHOR Handle prediction validated (give points to winners)
@@ -178,12 +183,12 @@ class MainSocketHandler {
                 this.io.to(socket.id).emit('setPoints', { points: user.points });
             }
         });
-        this.io.local.emit("updateLeaderboard", { users: this.manager.users });
+        this.io.local.emit("updateLeaderboard", { users: this.filteredUsers() });
     }
 
     // ANCHOR Send users
     sendUsers(socket) {
-        this.io.to(socket.id).emit("sendUsers", { users: this.manager.users });
+        this.io.to(socket.id).emit("sendUsers", { users: this.filteredUsers() });
     }
     // !SECTION
 
