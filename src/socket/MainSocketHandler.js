@@ -82,14 +82,15 @@ class MainSocketHandler {
         });
 
         this.saveUser(socket, user);
-        this.emitInitialState(socket, user);
-        
+
         const userIndex = this.manager.users.findIndex(arrayUser => arrayUser.userID === user.userID);
         if (userIndex === -1) {
             this.manager.users.push(user);
             this.manager.number++;
             const intervalID = setInterval(() => this.incrementWatchPoints(socket, user), 300000);
         }
+
+        this.emitInitialState(socket, user);
     }
 
     // ANCHOR Emit initial state to the connected user
