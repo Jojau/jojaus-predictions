@@ -209,6 +209,13 @@ input {
   text-align: center;
   margin-bottom: 16px;
 }
+#mainContainer #predictionsGameContainer #predictions #predictionsContainer .currentPrediction > .title a img {
+  margin-left: 8px;
+  position: relative;
+  top: 5px;
+  height: 24px;
+  width: 24px;
+}
 #mainContainer #predictionsGameContainer #predictions #predictionsContainer .currentPrediction .status {
   position: absolute;
   top: 0;

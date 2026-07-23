@@ -95,7 +95,7 @@
     <!-- ANCHOR PREDICTION -->
     <template id="currentPrediction">
         <div class="currentPrediction">
-            <h3 class="title">Prediction title</h3>
+            <h3 class="title"><span>Prediction title</span> <a href="#" target="_blank" title="Open the prediction explaination in a new tab"><img src="assets/question_mark_icon.svg" alt="Question mark icon"></a></h3>
             <div class="status"></div>
             <div class="outcomes">
             </div>
@@ -209,7 +209,8 @@
                 // ANCHOR DISPLAY PREDICTION
                 let currentPredictionElm = currentPredictionTemplate.cloneNode(true);
                 currentPredictionElm.querySelector('.currentPrediction').classList.add(prediction.status);
-                currentPredictionElm.querySelector(".title").textContent = prediction.data.title;
+                currentPredictionElm.querySelector(".title span").textContent = prediction.data.title;
+                currentPredictionElm.querySelector(".title a").href = prediction.explanationLink;
                 if (prediction.status == 'closing-soon') {
                     currentPredictionElm.querySelector('.status').textContent = "Closing soon!"
                     currentPredictionElm.querySelector('.status').setAttribute('title', 'Bets closing at next loading zone (or cutscene idk)');
